@@ -115,6 +115,26 @@
       height: 80px;
       transition: all 0.4s ease;
     }
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 1001;
+      padding: 10px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--ink);
+      transition: 0.3s;
+      border-radius: 2px;
+    }
+    .nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.active span:nth-child(2) { opacity: 0; }
+    .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
     nav.scrolled {
       height: 70px;
       background: rgba(255, 255, 255, 0.9);
@@ -1205,150 +1225,115 @@
     .faq-item.open .faq-a { max-height: 200px; padding: 0 1.5rem 1.25rem; }
     .faq-a p { font-size: 0.88rem; color: var(--ink-muted); font-weight: 300; line-height: 1.75; }
 
-    /* COMPLETE MOBILE RESPONSIVENESS (768px) */
+    /* COMPLETE MOBILE RESPONSIVENESS */
     @media (max-width: 768px) {
-      section { padding: 60px 5vw; }
-      .section-title { font-size: clamp(1.8rem, 6vw, 2.4rem); }
+      section { padding: 60px 5vw !important; }
+      .section-title { font-size: clamp(1.8rem, 6vw, 2.5rem) !important; }
 
       /* 1. NAVBAR */
-      .nav-links { display: none; }
+      .nav-links { 
+        display: none; 
+        position: absolute; top: 100%; left: 0; right: 0; 
+        background: rgba(255,255,255,0.98); 
+        flex-direction: column; padding: 2rem; gap: 1.5rem; 
+        text-align: center; border-bottom: 2px solid var(--pink-light);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        z-index: 1000;
+      }
+      .nav-links.active { display: flex; }
+      .nav-toggle { display: flex; }
       .nav-cta { font-size: 0.7rem; padding: 8px 14px; }
-      .logo-brand { font-size: 0.95rem; }
+      .nav-logo img { width: 36px; height: 36px; }
+      .nav-logo-text { font-size: 0.95rem; }
 
       /* 2. HERO */
-      .hero { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
-      .hero h1 { font-size: clamp(2.2rem, 8vw, 3rem); }
-      .hero-logo-wrap { width: 240px; margin: 0 auto; }
+      .hero { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
+      .hero h1 { font-size: clamp(2.2rem, 8vw, 3.5rem); }
+      .hero-logo-wrap { width: 220px; margin: 0 auto; }
       .hero-tag { display: none; }
-      .hero-trust { gap: 1rem; justify-content: center; }
-      .trust-number { font-size: 1.4rem; }
+      .hero-trust { gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
+      .hero-actions { justify-content: center; }
       .hero-content { order: 2; }
       .hero-visual { order: 1; }
 
-      /* 3. COUNTDOWN BANNER */
-      .countdown-banner { flex-direction: column; text-align: center; gap: 1rem; }
-      .cd-num { font-size: 1.1rem; }
-      .cd-unit { min-width: 42px; }
-      .countdown-cta { width: 100%; text-align: center; }
+      /* 3. COLLECTIONS */
+      .coll-card { flex: 0 0 160px; height: 210px; }
 
-      /* 4. TRUST STRIP */
-      .trust-badges { 
-        display: grid; 
-        grid-template-columns: repeat(2, 1fr); 
-        gap: 0; 
-      }
-      .trust-badge { 
-        padding: 8px 12px; 
-        border-right: 1.5px solid var(--border-soft); 
-        border-bottom: 1.5px solid var(--border-soft);
-      }
-      .trust-badge:nth-child(2n) { border-right: none; }
-      .trust-badge:nth-child(n+5) { border-bottom: none; }
-      .trust-badge-icon { width: 28px; height: 28px; font-size: 14px; }
+      /* 4. OCCASION SHOP */
+      .occ-card { flex: 0 0 200px; height: 300px; }
 
-      /* 5. COLLECTIONS GRID (Mobile Tweak) */
-      .coll-card { 
-        flex: 0 0 180px; 
-        height: 240px; 
-      }
-      .coll-name { font-size: 1rem; }
+      /* 5. TRENDING GRID */
+      .trending-grid { grid-template-columns: 1fr 1fr; }
 
-      /* 6. OCCASION CHIPS */
-      .occasion-chips { flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
-      .occ-chip { font-size: 0.75rem; padding: 8px 14px; }
+      /* 6. USP GRID */
+      .usp-grid { grid-template-columns: 1fr 1fr; }
 
-      /* 7. OCCASION GRID */
-      .occasion-grid { 
-        padding-bottom: 1.5rem; 
-      }
-      .occ-card { 
-        flex: 0 0 200px; 
-        height: 300px; 
-      }
+      /* 7. ABOUT SECTION */
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .about-visual { grid-template-columns: 1fr 1fr; }
 
-      /* 8. TRENDING GRID */
-      .trending-grid { grid-template-columns: 1fr; }
-      .trend-visual { height: 200px; }
+      /* 8. MEET THE OWNER */
+      .meet-grid { grid-template-columns: 1fr; }
+      .meet-photo-collage { height: 320px; }
+      .meet-line-v, .meet-line-h { display: none; }
 
-      /* 9. REELS GRID */
-      .reels-grid { grid-template-columns: 1fr; max-width: 100%; }
-      .reel-preview { height: 260px; }
 
-      /* 10. ABOUT SECTION */
-      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .about-visual { 
-        display: grid; 
-        grid-template-columns: repeat(2, 1fr); 
-        gap: 1rem;
-      }
-
-      /* 11. HOW TO ORDER */
-      .steps-row { 
-        display: grid; 
-        grid-template-columns: repeat(2, 1fr); 
-        gap: 1rem; 
-        padding-left: 0;
-      }
-      .steps-row::before { display: none !important; }
-      .step-item { 
-        text-align: center; 
-        display: flex;
-        flex-direction: column; 
-        align-items: center;
-        gap: 0.5rem;
-        padding: 1.5rem 1rem;
-        background: var(--white);
-        border: 1px solid var(--border-soft);
-      }
-      .step-num-wrap { margin-bottom: 0; }
-      .step-icon { display: block; transform: none; opacity: 1; margin: 0; }
-
-      /* 12. REVIEWS CAROUSEL */
-      .review-card { min-width: 100% !important; flex: 0 0 100% !important; }
-
-      /* 13. WHATSAPP CATALOGUE */
-      .wa-catalogue-inner { grid-template-columns: 1fr; padding: 2rem 1.5rem; text-align: center; }
+      /* 9. WHATSAPP CATALOGUE */
+      .wa-catalogue-inner { grid-template-columns: 1fr; text-align: center; padding: 2.5rem 1.5rem; }
       .wa-cat-phone { display: none; }
-      .wa-cat-title { font-size: 1.6rem; }
+      .wa-cat-title { font-size: clamp(1.5rem, 5vw, 2.2rem); }
+      .wa-cat-btn { width: 100%; justify-content: center; }
       .wa-cat-features { justify-content: center; }
 
-      /* 14. MEET THE OWNER */
-      .meet-grid { grid-template-columns: 1fr; }
-      .meet-photo-grid {
-        grid-template-columns: 1.2fr 1fr;
-      }
-      .meet-badge { position: static; margin-top: 0.75rem; }
-
-
-      /* 15. DELIVERY STRIP */
-      .delivery-logos { 
-        display: grid; 
-        grid-template-columns: repeat(3, 1fr); 
-        gap: 1.5rem;
-        justify-items: center;
-      }
-      .delivery-logo { padding: 0 0.75rem; }
-      .delivery-logo-icon { width: 40px; height: 40px; font-size: 0.75rem; }
-
-      /* 16. FAQ */
+      /* 10. FAQ */
       .faq-grid { grid-template-columns: 1fr; }
-      .faq-q { padding: 1.1rem 1.25rem; }
 
-      /* 17. CTA SECTION */
-      .cta-inner { padding: 80px 6vw; }
-      .cta-actions { flex-direction: column; gap: 1rem; }
-      .cta-actions .btn-white, .cta-actions .btn-outline-white { width: 100%; justify-content: center; }
+      /* 11. HOW TO ORDER */
+      .steps-row { grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .steps-row::before { display: none !important; }
+      .step-item { padding: 1.5rem 1rem; }
 
-      /* 18. FOOTER */
-      footer { flex-direction: column; text-align: center; gap: 1.25rem; align-items: center; padding: 40px 5vw; }
-      .footer-links { flex-wrap: wrap; justify-content: center; }
+      /* 12. REVIEWS */
+      .carousel-btn { width: 36px; height: 36px; }
 
-      /* 19. FLOATING WHATSAPP */
-      .wa-float { bottom: 16px; right: 16px; width: 50px; height: 50px; }
+      /* 13. REELS */
+      .reels-grid { grid-template-columns: 1fr; }
+      .reel-preview { height: 240px; }
 
-      /* 20. SCROLL TO TOP */
-      #scrollTop { bottom: 80px; right: 16px; }
+      /* 14. TRUST BADGES */
+      .trust-strip { padding: 20px 5vw; }
+      .trust-badges { gap: 10px; justify-content: center; }
+      .trust-badge { flex: 0 0 45%; border-right: none; padding: 10px 12px; }
+
+      /* 15. DELIVERY LOGOS */
+      .delivery-logos { justify-content: center; flex-wrap: wrap; }
+      .delivery-logo { border-right: none; padding: 0 1rem; margin-bottom: 1rem; }
+
+      /* 16. COUNTDOWN BANNER */
+      .countdown-banner { flex-wrap: wrap; text-align: center; justify-content: center; gap: 1rem; }
+      .cd-num { font-size: 1.1rem; }
+
+      /* 17. FOOTER */
+      footer { flex-direction: column; text-align: center; gap: 1.5rem; align-items: center; padding: 40px 5vw; }
+      .footer-links { flex-direction: column; gap: 1rem; justify-content: center; }
+
+      /* 18. FLOATING WHATSAPP */
+      .wa-float { bottom: 20px; right: 16px; width: 50px; height: 50px; }
+
+      /* 19. SCROLL TO TOP */
+      #scrollTop { bottom: 82px; right: 16px; }
     }
+
+    @media (max-width: 480px) {
+      .trending-grid { grid-template-columns: 1fr; }
+      .steps-row { grid-template-columns: 1fr; }
+      .countdown-text { display: none; }
+    }
+
+    @media (max-width: 400px) {
+      .usp-grid { grid-template-columns: 1fr; }
+    }
+
 
     /* FULL ANIMATION SYSTEM */
 
@@ -1794,24 +1779,51 @@
       gap: 4rem;
       align-items: center;
     }
-    .meet-photo-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      grid-template-rows: auto auto;
+    .meet-photo-collage {
+      position: relative;
+      display: flex;
       gap: 0.75rem;
+      height: 480px;
     }
-    .meet-photo-cell {
+
+    .meet-col-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      flex: 1.2;
+    }
+
+    .meet-col-right {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      flex: 1;
+    }
+
+    .meet-img-main {
+      flex: 2;
       border-radius: 16px;
       overflow: hidden;
-      background: rgba(232,121,154,0.12);
-      aspect-ratio: 1;
+      background: rgba(232,121,154,0.15);
     }
-    .meet-photo-cell.meet-photo-tall {
-      grid-row: 1 / 3;
-      aspect-ratio: unset;
-      min-height: 340px;
+
+    .meet-img-small {
+      flex: 1;
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(232,121,154,0.1);
     }
-    .meet-photo-cell img {
+
+    .meet-img-mid {
+      flex: 1.4;
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(232,121,154,0.1);
+    }
+
+    .meet-img-main img,
+    .meet-img-small img,
+    .meet-img-mid img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -1819,40 +1831,82 @@
       display: block;
       transition: transform 0.4s ease;
     }
-    .meet-photo-cell:hover img { transform: scale(1.05); }
 
-    .meet-photo-placeholder {
+    .meet-img-main:hover img,
+    .meet-img-small:hover img,
+    .meet-img-mid:hover img {
+      transform: scale(1.05);
+    }
+
+    .meet-line-v {
+      position: absolute;
+      left: 50%;
+      top: -20px;
+      bottom: -20px;
+      width: 1px;
+      background: rgba(232,121,154,0.25);
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .meet-line-h {
+      position: absolute;
+      left: -20px;
+      right: -20px;
+      top: 50%;
+      height: 1px;
+      background: rgba(232,121,154,0.25);
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .meet-badge-new {
+      position: absolute;
+      bottom: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #E8799A;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 100px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      box-shadow: 0 6px 20px rgba(232,121,154,0.4);
+      text-align: center;
+      z-index: 3;
+    }
+
+    .meet-badge-new span {
+      display: block;
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.85;
+      margin-top: 2px;
+    }
+
+    .meet-img-ph {
       width: 100%;
       height: 100%;
-      min-height: 140px;
+      min-height: 100px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      color: rgba(255,255,255,0.3);
-      font-size: 1.6rem;
+      gap: 6px;
+      color: rgba(255,255,255,0.25);
+      font-size: 1.4rem;
       text-align: center;
-      padding: 1rem;
     }
-    .meet-photo-placeholder span {
-      font-size: 0.65rem;
-      font-weight: 500;
+    .meet-img-ph span {
+      font-size: 0.62rem;
       color: rgba(255,255,255,0.2);
-      letter-spacing: 0.06em;
-      line-height: 1.5;
+      letter-spacing: 0.05em;
     }
-    .meet-badge {
-      position: static;
-      display: inline-block;
-      margin-top: 0.75rem;
-      background: #E8799A;
-      color: #fff;
-      padding: 10px 18px;
-      border-radius: 14px;
-      font-size: 0.88rem;
-      font-weight: 700;
-    }
+
 
     .meet-section .section-label { color: var(--pink-mid); }
     .meet-section .section-title { color: #fff; letter-spacing: -0.02em; }
@@ -2422,7 +2476,12 @@
       <span>Styled with love</span>
     </div>
   </a>
-  <ul class="nav-links">
+  <div class="nav-toggle" id="navToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <ul class="nav-links" id="navLinks">
     <li><a href="#collections">Collections</a></li>
     <li><a href="#reels">Reels</a></li>
     <li><a href="#about">About</a></li>
@@ -2910,22 +2969,29 @@
 <section class="meet-section" id="meet">
   <div class="meet-grid">
     <div class="meet-photo-container">
-      <div class="meet-photo-grid">
-        <div class="meet-photo-cell meet-photo-tall">
-          <img src="owner.jpg" alt="Mrinmoyee Borah" onerror="this.parentElement.innerHTML='<div class=meet-photo-placeholder>📷<span>owner.jpg</span></div>'" />
+      <div class="meet-photo-collage">
+        <div class="meet-col-left">
+          <div class="meet-img-main">
+            <img src="owner.jpg" alt="Mrinmoyee Borah" onerror="this.parentElement.innerHTML='<div class=meet-img-ph>📷<span>owner.jpg</span></div>'" />
+          </div>
+          <div class="meet-img-small">
+            <img src="owner-3.jpg" alt="" onerror="this.parentElement.innerHTML='<div class=meet-img-ph>📷<span>owner-3.jpg</span></div>'" />
+          </div>
         </div>
-        <div class="meet-photo-cell">
-          <img src="owner-2.jpg" alt="Sisters Stylo Studio" onerror="this.parentElement.innerHTML='<div class=meet-photo-placeholder>📷<span>owner-2.jpg</span></div>'" />
+        <div class="meet-col-right">
+          <div class="meet-img-small">
+            <img src="owner-2.jpg" alt="" onerror="this.parentElement.innerHTML='<div class=meet-img-ph>📷<span>owner-2.jpg</span></div>'" />
+          </div>
+          <div class="meet-img-mid">
+            <img src="owner-4.jpg" alt="" onerror="this.parentElement.innerHTML='<div class=meet-img-ph>📷<span>owner-4.jpg</span></div>'" />
+          </div>
         </div>
-        <div class="meet-photo-cell">
-          <img src="owner-3.jpg" alt="Sisters Stylo Studio" onerror="this.parentElement.innerHTML='<div class=meet-photo-placeholder>📷<span>owner-3.jpg</span></div>'" />
-        </div>
-        <div class="meet-photo-cell">
-          <img src="owner-4.jpg" alt="Sisters Stylo Studio" onerror="this.parentElement.innerHTML='<div class=meet-photo-placeholder>📷<span>owner-4.jpg</span></div>'" />
-        </div>
+        <div class="meet-line-v"></div>
+        <div class="meet-line-h"></div>
+        <div class="meet-badge-new">Mrinmoyee Borah<span>Founder & Stylist</span></div>
       </div>
-      <div class="meet-badge">Mrinmoyee Borah</div>
     </div>
+
 
     <div>
       <p class="section-label reveal">The face behind the brand</p>
@@ -3199,6 +3265,31 @@
         if (!isOpen) item.classList.add('open');
       });
     });
+  })();
+
+  // MOBILE NAV TOGGLE
+  (function() {
+    const toggle = document.getElementById('navToggle');
+    const links  = document.getElementById('navLinks');
+    if (toggle && links) {
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggle.classList.toggle('active');
+        links.classList.toggle('active');
+      });
+      document.addEventListener('click', (e) => {
+        if (!links.contains(e.target) && !toggle.contains(e.target)) {
+          toggle.classList.remove('active');
+          links.classList.remove('active');
+        }
+      });
+      links.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          toggle.classList.remove('active');
+          links.classList.remove('active');
+        });
+      });
+    }
   })();
 
   //  REVIEWS CAROUSEL
