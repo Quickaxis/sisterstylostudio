@@ -1,0 +1,3091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sisters Stylo Studio — Styled with Love</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,600;1,9..144,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* UI/UX PRO MAX - DESIGN SYSTEM V2 */
+    :root {
+      /* Colors (Hybrid: Wedding/Luxury + Beauty) */
+      --pink:        #EC4899;
+      --pink-deep:   #BE185D;
+      --pink-mid:    #F472B6;
+      --pink-light:  #FDF2F8;
+      --pink-soft:   #FFF1F2;
+      --white:       #FFFFFF;
+      --ink:         #1C1917; /* Slate-900 / Stone Dark */
+      --ink-muted:   #57534E;
+      --ink-faint:   #A8A29E;
+      --gold:        #A16207;
+      
+      /* Transparency / Glass */
+      --glass:       rgba(255, 255, 255, 0.7);
+      --glass-dark:  rgba(28, 25, 23, 0.85);
+      --border:      rgba(236, 72, 153, 0.15);
+      --border-soft: rgba(236, 72, 153, 0.08);
+      
+      /* Typography */
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body:    'DM Sans', sans-serif;
+      
+      /* Spacing (8px system) */
+      --s-1: 8px; --s-2: 16px; --s-3: 24px; --s-4: 32px; --s-5: 40px; --s-6: 48px;
+    }
+
+    /* Reset & Base */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+    
+    html {
+      scroll-behavior: smooth;
+      background: var(--pink-light);
+    }
+    
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      /* Dynamic Background Gradient (Aurora Style) */
+      background: 
+        radial-gradient(circle at 0% 0%, rgba(236,72,153,0.05) 0%, transparent 50%),
+        radial-gradient(circle at 100% 100%, rgba(161,98,7,0.03) 0%, transparent 50%),
+        var(--white);
+    }
+
+    /* TYPOGRAPHY UTILS (Editorial Style - Style 66) */
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--pink);
+      font-weight: 600;
+      margin-bottom: var(--s-1);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700;
+      line-height: 1.05;
+      color: var(--ink);
+      margin-bottom: var(--s-2);
+      letter-spacing: -0.03em;
+    }
+    .section-title em {
+      font-style: italic;
+      color: var(--gold); /* Switched to gold for emphasis */
+      font-weight: 400;
+    }
+    .section-sub {
+      font-size: 1.1rem;
+      color: var(--ink-muted);
+      font-weight: 400;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    /* GLOBAL ANIMATIONS & INTERACTIVE (Tactile - Style 60) */
+    .hover-lift {
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+    }
+    .hover-lift:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
+    .btn-press {
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .btn-press:active {
+      transform: scale(0.94);
+    }
+
+    /* NAV REFINEMENT */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: var(--glass);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border-soft);
+      padding: 0 8vw;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 80px;
+      transition: all 0.4s ease;
+    }
+    nav.scrolled {
+      height: 70px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+    }
+    .nav-logo { display: flex; align-items: center; gap: var(--s-2); text-decoration: none; }
+    .nav-logo img { 
+      width: 44px; height: 44px; 
+      border-radius: var(--radius-pill); 
+      object-fit: cover; 
+      box-shadow: 0 0 0 4px var(--pink-light);
+    }
+    .nav-logo-text { 
+      font-family: var(--font-display); 
+      font-size: 1.25rem; 
+      font-weight: 700; 
+      color: var(--ink); 
+      line-height: 1;
+    }
+    .nav-logo-text span { 
+      display: block; 
+      font-family: var(--font-body); 
+      font-size: 0.65rem; 
+      font-weight: 600; 
+      letter-spacing: 0.15em; 
+      color: var(--pink); 
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    
+    .nav-links { display: flex; gap: var(--s-4); list-style: none; }
+    .nav-links a { 
+      text-decoration: none; 
+      font-size: 0.8rem; 
+      letter-spacing: 0.05em; 
+      color: var(--ink-muted); 
+      font-weight: 500; 
+      transition: var(--transition);
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+      background: var(--pink); transition: width 0.3s var(--ease-spring);
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a:hover { color: var(--pink); }
+
+    .nav-cta { 
+      background: var(--pink); 
+      color: var(--white); 
+      text-decoration: none; 
+      font-size: 0.85rem; 
+      font-weight: 600; 
+      padding: 12px 28px; 
+      border-radius: var(--radius-pill);
+      transition: var(--transition);
+      box-shadow: 0 8px 20px rgba(236, 72, 153, 0.2);
+    }
+    .nav-cta:hover { 
+      background: var(--pink-deep); 
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(236, 72, 153, 0.3);
+    }
+    .nav-cta:active { transform: translateY(0) scale(0.96); }
+
+    /* HERO REFINEMENT (Hero-Centric - Style 20) */
+    .hero { 
+      min-height: 100vh; 
+      padding: 140px 8vw 100px; 
+      display: grid; 
+      grid-template-columns: 1.1fr 0.9fr; 
+      align-items: center; 
+      gap: var(--s-6); 
+      overflow: hidden;
+    }
+    .hero-content { position: relative; z-index: 10; }
+    
+    .hero-badge { 
+      display: inline-flex; align-items: center; gap: 8px; 
+      background: var(--pink-soft); 
+      color: var(--pink-deep); 
+      font-size: 0.75rem; 
+      letter-spacing: 0.15em; 
+      text-transform: uppercase; 
+      padding: 10px 20px; 
+      border-radius: var(--radius-pill); 
+      margin-bottom: var(--s-3); 
+      font-weight: 700;
+      border: 1px solid var(--border-soft);
+      animation: heroFadeUp 1s var(--ease-spring);
+    }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--pink); }
+
+    .hero h1 { 
+      font-family: var(--font-display); 
+      font-size: clamp(3.5rem, 8vw, 6.5rem); 
+      font-weight: 900; 
+      line-height: 0.95; 
+      color: var(--ink); 
+      margin-bottom: var(--s-3); 
+      letter-spacing: -0.04em; 
+      animation: heroFadeUp 1.2s var(--ease-spring) 0.1s backwards;
+    }
+    .hero h1 em { font-style: italic; color: var(--pink); font-weight: 400; }
+    
+    .hero p { 
+      font-size: 1.15rem; 
+      color: var(--ink-muted); 
+      max-width: 480px; 
+      margin-bottom: var(--s-5); 
+      line-height: 1.6; 
+      animation: heroFadeUp 1.2s var(--ease-spring) 0.2s backwards;
+    }
+
+    .hero-actions { display: flex; gap: var(--s-2); flex-wrap: wrap; margin-bottom: var(--s-5); animation: heroFadeUp 1.2s var(--ease-spring) 0.3s backwards; }
+
+    .btn-primary { 
+      display: inline-flex; align-items: center; gap: 10px; 
+      background: var(--pink); color: var(--white); 
+      text-decoration: none; font-size: 0.85rem; padding: 18px 40px; 
+      border-radius: var(--radius-pill); font-weight: 700; 
+      letter-spacing: 0.05em; transition: var(--transition);
+      box-shadow: 0 10px 30px rgba(236,72,153,0.2);
+    }
+    .btn-primary:hover { 
+      background: var(--ink); 
+      transform: translateY(-4px); 
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15); 
+    }
+    
+    .btn-secondary { 
+      display: inline-flex; align-items: center; gap: 10px; 
+      background: var(--white); color: var(--ink); 
+      text-decoration: none; font-size: 0.85rem; padding: 18px 40px; 
+      border-radius: var(--radius-pill); font-weight: 700; 
+      border: 1px solid var(--border); transition: var(--transition);
+    }
+    .btn-secondary:hover { background: var(--pink-soft); border-color: var(--pink); color: var(--pink-deep); }
+
+    .hero-trust { 
+      display: flex; align-items: center; gap: var(--s-5); 
+      padding-top: var(--s-4); 
+      border-top: 1px solid var(--border-soft); 
+      animation: heroFadeUp 1.2s var(--ease-spring) 0.4s backwards;
+    }
+    .trust-item { text-align: left; }
+    .trust-number { font-family: var(--font-display); font-size: 2rem; font-weight: 900; color: var(--ink); line-height: 1; }
+    .trust-label { font-size: 0.75rem; color: var(--ink-faint); margin-top: 4px; }
+
+    /* Visual Side */
+    .hero-visual { position: relative; animation: heroFadeUp 1.5s var(--ease-spring) 0.5s backwards; }
+    .hero-main-img { 
+      width: 100%; aspect-ratio: 4/5; 
+      object-fit: cover; border-radius: 60px 200px 60px 60px; 
+      box-shadow: 30px 60px 100px rgba(0,0,0,0.12);
+      transition: transform 0.6s var(--ease-spring);
+    }
+    .hero-visual:hover .hero-main-img { transform: scale(1.02); }
+
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .trust-divider { width: 1px; height: 40px; background: var(--border); }
+
+    .hero-visual { display: flex; align-items: center; justify-content: center; position: relative; }
+    .hero-logo-wrap { position: relative; width: min(400px, 90%); }
+    .logo-ring { width: 100%; aspect-ratio: 1; border-radius: 50%; background: var(--pink-soft); border: 2px solid var(--pink-light); display: flex; align-items: center; justify-content: center; animation: float 5s ease-in-out infinite; overflow: hidden; }
+    .logo-ring img { width: 88%; object-fit: contain; border-radius: 50%; }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+    .petal { position: absolute; border-radius: 50%; background: var(--pink-light); z-index: -1; }
+    .petal-1 { width: 200px; height: 200px; top: -30px; right: -40px; opacity: 0.6; }
+    .petal-2 { width: 130px; height: 130px; bottom: 10px; left: -20px; opacity: 0.45; }
+    .hero-tag { position: absolute; background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 10px 16px; font-size: 0.78rem; font-weight: 500; color: var(--ink); box-shadow: 0 4px 20px rgba(232,121,154,0.1); white-space: nowrap; }
+    .hero-tag.tag-ship { bottom: 10%; right: -5%; }
+    .hero-tag.tag-love { top: 12%; left: -6%; }
+    .hero-tag-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 7px; vertical-align: middle; }
+    .dot-pink { background: var(--pink); }
+    .dot-green { background: #5CC8A0; }
+
+    /* MARQUEE */
+    .marquee-strip { background: var(--pink-light); padding: 13px 0; overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .marquee-inner { display: flex; gap: 3rem; animation: marquee 22s linear infinite; width: max-content; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee-item { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pink-deep); white-space: nowrap; display: flex; align-items: center; gap: 1rem; font-weight: 500; }
+    .marquee-item::after { content: '✦'; color: var(--pink-mid); font-size: 10px; }
+
+    /* SECTION BASE */
+    section { padding: 90px 5vw; }
+    .section-label { font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--pink); font-weight: 600; margin-bottom: 0.75rem; }
+    .section-title { font-family: var(--font-display); font-size: clamp(2.2rem, 4vw, 3.6rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 0.9rem; }
+    .section-title em { font-style: italic; color: var(--pink); font-weight: 700; }
+    .section-sub { font-size: 1rem; color: var(--ink-muted); font-weight: 400; max-width: 520px; line-height: 1.75; }
+
+    /* USP (Bento Lite - Style 17) */
+    .usp-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+      gap: var(--s-3); 
+    }
+    .usp-card { 
+      background: var(--white); 
+      border: 1px solid var(--border-soft); 
+      border-radius: var(--radius-lg); 
+      padding: var(--s-5) var(--s-4); 
+      transition: var(--transition);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+    }
+    .usp-card:hover { 
+      transform: translateY(-8px); 
+      box-shadow: 0 20px 40px rgba(236,72,153,0.08);
+      border-color: var(--pink-soft);
+    }
+    .usp-icon { 
+      width: 60px; height: 60px; 
+      border-radius: var(--radius-md); 
+      background: var(--pink-soft); 
+      display: flex; align-items: center; justify-content: center; 
+      font-size: 24px; margin-bottom: var(--s-3); 
+      color: var(--pink);
+    }
+    .usp-card h3 { 
+      font-family: var(--font-display); 
+      font-size: 1.4rem; font-weight: 700; 
+      color: var(--ink); margin-bottom: var(--s-1); 
+    }
+    .usp-card p { font-size: 1rem; color: var(--ink-muted); line-height: 1.6; }
+
+    /* COLLECTIONS (Bento Grid - Style 17) */
+    .collections-grid { 
+      display: grid; 
+      grid-template-columns: repeat(4, 1fr); 
+      grid-template-rows: repeat(2, 300px);
+      gap: var(--s-3); 
+      margin-top: var(--s-5); 
+    }
+    .coll-card { 
+      border-radius: var(--radius-lg); 
+      overflow: hidden; position: relative; cursor: pointer; 
+      background: var(--pink-soft); 
+    }
+    .coll-card:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+    .coll-card:nth-child(2) { grid-column: span 2; }
+    
+    .coll-bg { 
+      width: 100%; height: 100%; 
+      display: flex; align-items: flex-end; 
+      padding: var(--s-4); position: relative; 
+      transition: var(--transition);
+    }
+    .coll-card:hover .coll-bg { scale: 1.05; }
+    
+    .coll-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 60%);
+      transition: var(--transition);
+      z-index: 1;
+    }
+    .coll-card:hover .coll-overlay { background: linear-gradient(to top, rgba(236,72,153,0.5) 0%, transparent 70%); }
+
+    .coll-label { position: relative; z-index: 2; color: var(--white); }
+    .coll-tag { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.8); margin-bottom: 4px; }
+    .coll-name { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; }
+    .coll-card:nth-child(1) .coll-name { font-size: 2.5rem; }
+    
+    .coll-arrow { 
+      position: absolute; top: var(--s-3); right: var(--s-3); 
+      width: 44px; height: 44px; 
+      background: var(--white); border-radius: 50%; 
+      display: flex; align-items: center; justify-content: center; 
+      font-size: 16px; color: var(--pink);
+      transform: translate(10px, -10px); opacity: 0;
+      transition: var(--transition);
+      z-index: 3;
+    }
+    .coll-card:hover .coll-arrow { opacity: 1; transform: translate(0, 0); }
+
+    /* INSTAGRAM REELS (Clickable & Visual) */
+    .reels-section { background: var(--pink-soft); }
+    .reels-header { margin-bottom: 3rem; }
+    .reels-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
+    .reel-card-link { 
+      display: block; 
+      text-decoration: none; 
+      color: inherit; 
+      transition: var(--transition);
+    }
+
+    .reel-card {
+      border-radius: var(--radius-lg); 
+      overflow: hidden;
+      background: var(--white);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      transition: var(--transition);
+    }
+    .reel-card-link:hover .reel-card { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(236,72,153,0.1); }
+
+    .reel-preview {
+      height: 380px; position: relative;
+      background-size: cover;
+      background-position: center;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    
+    .reel-preview::after {
+      content: 'Watch Reel';
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.4);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white); font-weight: 700; font-size: 1.1rem;
+      opacity: 0; transition: opacity 0.3s ease;
+      z-index: 5;
+    }
+    .reel-card-link:hover .reel-preview::after { opacity: 1; }
+
+    .reel-gradient {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.6) 100%);
+      z-index: 1;
+    }
+
+    .reel-play-btn {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      backdrop-filter: blur(8px);
+      border: 2px solid rgba(255,255,255,0.5);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; z-index: 6;
+      transition: transform 0.4s var(--ease-spring);
+    }
+    .reel-card-link:hover .reel-play-btn { transform: scale(1.1) rotate(90deg); opacity: 0; }
+
+    .reel-label {
+      position: absolute; bottom: 1rem; left: 1rem;
+      display: flex; align-items: center; gap: 6px;
+      color: #fff; font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.04em; z-index: 2;
+    }
+    .reel-ig-icon {
+      width: 22px; height: 22px; border-radius: 6px;
+      background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .reel-tag {
+      position: absolute; top: 1rem; right: 1rem;
+      background: rgba(255,255,255,0.9);
+      color: var(--pink-deep); font-size: 0.65rem;
+      font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 5px 12px; border-radius: 100px; z-index: 2;
+    }
+
+    .reel-info { padding: 1.25rem 1.5rem 1.5rem; }
+    .reel-title {
+      font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+      color: var(--ink); margin-bottom: 0.6rem; letter-spacing: -0.01em;
+    }
+    .reel-watch-btn {
+      font-size: 0.78rem; font-weight: 600; color: var(--pink);
+      text-decoration: none; letter-spacing: 0.03em;
+      transition: gap 0.2s, color 0.2s;
+      display: inline-flex; align-items: center;
+    }
+    .reel-watch-btn:hover { color: var(--pink-deep); }
+
+    /* ABOUT */
+    .about-section { background: var(--ink); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-section .section-label { color: var(--pink-mid); }
+    .about-section .section-title { color: #fff; font-weight: 900; }
+    .about-section .section-title em { color: var(--pink-mid); }
+    .about-text { font-size: 0.98rem; color: rgba(255,255,255,0.65); font-weight: 400; line-height: 1.85; margin-bottom: 1.5rem; }
+    .about-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .about-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); border-radius: 18px; padding: 1.5rem 1.25rem; }
+    .about-card:nth-child(1) { background: rgba(232,121,154,0.18); border-color: rgba(232,121,154,0.3); }
+    .about-card:nth-child(4) { background: rgba(232,121,154,0.12); border-color: rgba(232,121,154,0.25); }
+    .about-card-num { font-family: var(--font-display); font-size: 2.2rem; font-weight: 900; color: #fff; display: block; margin-bottom: 4px; letter-spacing: -0.02em; }
+    .about-card-label { font-size: 0.78rem; color: rgba(255,255,255,0.45); letter-spacing: 0.06em; }
+
+    /* HOW TO ORDER — ANIMATED */
+    .order-section { background: var(--white); overflow: hidden; }
+
+    .steps-row {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem; margin-top: 3.5rem; position: relative;
+    }
+
+    /* animated connector line that draws left→right */
+    .steps-row::before {
+      content: '';
+      position: absolute;
+      top: 34px; left: calc(12.5% + 29px); right: calc(12.5% + 29px);
+      height: 2px;
+      background: linear-gradient(90deg, var(--pink) 0%, var(--pink-mid) 100%);
+      transform-origin: left center;
+      transform: scaleX(0);
+      transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+      border-radius: 2px;
+    }
+    .steps-row.line-visible::before { transform: scaleX(1); }
+
+    /* STEP CARDS (Tactile - Style 60) */
+    .step-item {
+      text-align: center;
+      background: var(--white);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: var(--s-5) var(--s-3) var(--s-4);
+      position: relative;
+      transition: var(--transition);
+      cursor: default;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+    }
+    .step-item:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 30px 60px rgba(236,72,153,0.12);
+      border-color: var(--pink-mid);
+      background: var(--pink-soft);
+    }
+
+    /* number circle with ripple ring */
+    .step-num-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .step-num-wrap::before {
+      content: '';
+      position: absolute;
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      border: 1.5px solid var(--pink-mid);
+      opacity: 0;
+      transform: scale(0.7);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .step-item.step-visible .step-num-wrap::before {
+      opacity: 1; transform: scale(1);
+      animation: ripple-ring 2.5s ease-out 0.6s infinite;
+    }
+    @keyframes ripple-ring {
+      0%   { opacity: 0.8; transform: scale(1); }
+      100% { opacity: 0;   transform: scale(1.7); }
+    }
+
+    .step-num {
+      width: 58px; height: 58px;
+      border-radius: 50%;
+      background: var(--pink-light);
+      border: 2px solid var(--pink-mid);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 1.5rem; font-weight: 900;
+      color: var(--pink-deep);
+      position: relative; z-index: 1;
+      transform: scale(0.6) rotate(-20deg);
+      opacity: 0;
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease, background 0.3s ease, color 0.3s ease;
+    }
+    .step-item.step-visible .step-num {
+      transform: scale(1) rotate(0deg);
+      opacity: 1;
+    }
+    .step-item:hover .step-num {
+      background: var(--pink);
+      color: #fff;
+      border-color: var(--pink);
+    }
+
+    /* step icon (emoji in a small chip above title) */
+    .step-icon {
+      display: block;
+      font-size: 1.4rem;
+      margin-bottom: 0.6rem;
+      transform: translateY(8px);
+      opacity: 0;
+      transition: transform 0.5s ease 0.15s, opacity 0.4s ease 0.15s;
+    }
+    .step-item.step-visible .step-icon { transform: translateY(0); opacity: 1; }
+
+    .step-item h4 {
+      font-family: var(--font-display); font-size: 1.1rem; font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--ink); margin-bottom: 0.5rem;
+      transform: translateY(10px); opacity: 0;
+      transition: transform 0.5s ease 0.2s, opacity 0.4s ease 0.2s;
+    }
+    .step-item.step-visible h4 { transform: translateY(0); opacity: 1; }
+
+    .step-item p {
+      font-size: 0.83rem; color: var(--ink-muted); font-weight: 300; line-height: 1.65;
+      transform: translateY(10px); opacity: 0;
+      transition: transform 0.5s ease 0.3s, opacity 0.4s ease 0.3s;
+    }
+    .step-item.step-visible p { transform: translateY(0); opacity: 1; }
+
+    /* stagger per card */
+    .step-item:nth-child(1) .step-num { transition-delay: 0.1s; }
+    .step-item:nth-child(2) .step-num { transition-delay: 0.25s; }
+    .step-item:nth-child(3) .step-num { transition-delay: 0.4s; }
+    .step-item:nth-child(4) .step-num { transition-delay: 0.55s; }
+    .step-item:nth-child(1) h4,
+    .step-item:nth-child(1) p,
+    .step-item:nth-child(1) .step-icon { transition-delay: 0.15s, 0.25s, 0.1s; }
+    .step-item:nth-child(2) h4,
+    .step-item:nth-child(2) p,
+    .step-item:nth-child(2) .step-icon { transition-delay: 0.3s, 0.4s, 0.25s; }
+    .step-item:nth-child(3) h4,
+    .step-item:nth-child(3) p,
+    .step-item:nth-child(3) .step-icon { transition-delay: 0.45s, 0.55s, 0.4s; }
+    .step-item:nth-child(4) h4,
+    .step-item:nth-child(4) p,
+    .step-item:nth-child(4) .step-icon { transition-delay: 0.6s, 0.7s, 0.55s; }
+
+    /* REVIEWS */
+    /* REVIEWS CAROUSEL */
+    .reviews-section { background: var(--pink-soft); }
+
+    .reviews-carousel-wrap {
+      position: relative;
+      margin-top: 3rem;
+      overflow: hidden;
+    }
+
+    /* faded edges */
+    .reviews-carousel-wrap::before,
+    .reviews-carousel-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 80px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .reviews-carousel-wrap::before { left: 0; background: linear-gradient(to right, var(--pink-soft), transparent); }
+    .reviews-carousel-wrap::after  { right: 0; background: linear-gradient(to left, var(--pink-soft), transparent); }
+
+    .reviews-track {
+      display: flex;
+      gap: 1.5rem;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+
+    .review-card {
+      background: var(--white);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: var(--s-4);
+      flex: 0 0 calc(33.333% - 1rem);
+      min-width: 320px;
+      transition: var(--transition);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+    }
+    .review-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 48px rgba(236,72,153,0.1);
+      border-color: var(--pink-soft);
+    }
+
+    /* featured card gets a soft pink bg */
+    .review-card.featured {
+      background: var(--pink-soft);
+      border-color: var(--pink-mid);
+    }
+
+    .stars { display: flex; gap: 4px; margin-bottom: var(--s-3); }
+    .star { font-size: 14px; color: var(--gold); }
+
+    .review-quote { font-size: 3rem; font-family: var(--font-display); color: var(--pink-mid); line-height: 1; margin-bottom: 0.25rem; font-weight: 900; }
+    .review-text { font-family: var(--font-body); font-size: 1rem; font-style: italic; color: var(--ink); line-height: 1.6; margin-bottom: var(--s-3); }
+    .reviewer { display: flex; align-items: center; gap: 12px; }
+    .reviewer-avatar { 
+      width: 44px; height: 44px; border-radius: 50%; 
+      background: var(--pink-light); display: flex; align-items: center; justify-content: center; 
+      font-size: 14px; font-weight: 700; color: var(--pink-deep); 
+      border: 2px solid var(--white); box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    .reviewer-name { font-weight: 700; color: var(--ink); font-size: 1rem; }
+    .reviewer-loc { font-size: 0.75rem; color: var(--ink-faint); }
+
+    /* nav arrows */
+    .carousel-nav {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1rem; margin-top: 2rem;
+    }
+    .carousel-btn {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      color: var(--pink);
+      font-size: 1rem;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+      user-select: none;
+    }
+    .carousel-btn:hover { background: var(--pink); color: #fff; border-color: var(--pink); transform: scale(1.08); }
+
+    /* dots */
+    .carousel-dots {
+      display: flex; gap: 6px; align-items: center;
+    }
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--pink-mid);
+      opacity: 0.35;
+      cursor: pointer;
+      transition: opacity 0.25s, transform 0.25s, width 0.25s, border-radius 0.25s;
+    }
+    .dot.active {
+      opacity: 1;
+      width: 22px;
+      border-radius: 4px;
+      background: var(--pink);
+    }
+
+    /* CTA (Conversion Focused - Style 21) */
+    .cta-section { background: var(--pink-deep); overflow: hidden; position: relative; }
+    .cta-section::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 100% 0%, rgba(161,98,7,0.1) 0%, transparent 40%),
+                  radial-gradient(circle at 0% 100%, rgba(236,72,153,0.1) 0%, transparent 40%);
+    }
+    .cta-inner { 
+      max-width: 800px; text-align: center; margin: 0 auto; 
+      padding: var(--s-6) 0; position: relative; z-index: 2;
+    }
+    .cta-section .section-label { color: rgba(255,255,255,0.7); }
+    .cta-section .section-title { color: var(--white); font-size: clamp(2.5rem, 6vw, 4.5rem); }
+    .cta-section .section-title em { color: var(--gold); }
+    .cta-sub { 
+      font-size: 1.25rem; color: rgba(255,255,255,0.9); 
+      margin-bottom: var(--s-5); 
+    }
+    .btn-white { 
+      background: var(--white); color: var(--pink-deep); 
+      padding: 18px 44px; border-radius: var(--radius-pill); 
+      font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;
+      transition: var(--transition);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+    }
+    .btn-white:hover { 
+      background: var(--ink); color: var(--white);
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    .btn-outline-white { 
+      display: inline-flex; align-items: center; gap: 8px; 
+      background: transparent; color: #fff; text-decoration: none; 
+      font-size: 0.85rem; padding: 18px 44px; border-radius: var(--radius-pill); 
+      border: 2px solid rgba(255,255,255,0.3); font-weight: 700; transition: var(--transition); 
+    }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+    .cta-info { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; }
+    .cta-info-item { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: rgba(255,255,255,0.8); }
+
+    /* FOOTER (Agency/Premium - Style 10) */
+    footer { 
+      background: var(--ink); 
+      padding: var(--s-6) 8vw var(--s-4); 
+      display: flex; align-items: flex-start; justify-content: space-between; 
+      flex-wrap: wrap; gap: var(--s-4); 
+    }
+    .footer-brand { 
+      font-family: var(--font-display); 
+      font-size: 1.5rem; font-weight: 700; 
+      color: var(--white); 
+    }
+    .footer-brand span { 
+      display: block; 
+      font-family: var(--font-body); 
+      font-size: 0.75rem; color: rgba(255,255,255,0.4); 
+      margin-top: 8px; font-weight: 400; 
+    }
+    .footer-links { display: flex; gap: var(--s-4); list-style: none; }
+    .footer-links a { 
+      text-decoration: none; font-size: 0.9rem; 
+      color: rgba(255,255,255,0.6); 
+      transition: var(--transition); 
+    }
+    .footer-links a:hover { color: var(--pink); transform: translateX(4px); }
+    .footer-copy { 
+      width: 100%; border-top: 1px solid rgba(255,255,255,0.05); 
+      padding-top: var(--s-4); margin-top: var(--s-4);
+      font-size: 0.8rem; color: rgba(255,255,255,0.3); 
+    }
+
+    /*  FLOATING WHATSAPP ─ */
+    .wa-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 999;
+      width: 58px; height: 58px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 24px rgba(37,211,102,0.45);
+      text-decoration: none;
+      animation: wa-pulse 2.5s ease-in-out infinite;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .wa-float:hover { transform: scale(1.12); box-shadow: 0 10px 32px rgba(37,211,102,0.55); animation: none; }
+    .wa-float svg { width: 28px; height: 28px; }
+    @keyframes wa-pulse {
+      0%, 100% { box-shadow: 0 6px 24px rgba(37,211,102,0.45), 0 0 0 0 rgba(37,211,102,0.4); }
+      50%       { box-shadow: 0 6px 24px rgba(37,211,102,0.45), 0 0 0 12px rgba(37,211,102,0); }
+    }
+    .wa-tooltip {
+      position: absolute; right: 68px; top: 50%;
+      transform: translateY(-50%);
+      background: var(--ink); color: #fff;
+      font-size: 0.75rem; font-weight: 500;
+      padding: 6px 12px; border-radius: 8px;
+      white-space: nowrap; opacity: 0; pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .wa-float:hover .wa-tooltip { opacity: 1; }
+
+    /*  TRUST BADGES  */
+    .trust-strip {
+      background: var(--white);
+      border-bottom: 1px solid var(--border-soft);
+      padding: 20px 5vw;
+    }
+    .trust-badges {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0; flex-wrap: wrap;
+    }
+    .trust-badge {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 28px;
+      border-right: 1px solid var(--border);
+      flex: 0 0 auto;
+    }
+    .trust-badge:last-child { border-right: none; }
+    .trust-badge-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: var(--pink-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; flex-shrink: 0;
+    }
+    .trust-badge-text strong {
+      display: block; font-size: 0.82rem; font-weight: 500; color: var(--ink); line-height: 1.2;
+    }
+    .trust-badge-text span {
+      font-size: 0.72rem; color: var(--ink-faint); font-weight: 300;
+    }
+
+    /*  COUNTDOWN BANNER  */
+    .countdown-banner {
+      background: linear-gradient(135deg, #2A1A1F 0%, #4A2030 100%);
+      padding: 18px 5vw;
+      display: flex; align-items: center; justify-content: center;
+      gap: 1.5rem; flex-wrap: wrap;
+    }
+    .countdown-text {
+      font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--pink-mid); font-weight: 600;
+    }
+    .countdown-timer {
+      display: flex; gap: 8px; align-items: center;
+    }
+    .cd-unit {
+      text-align: center;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 6px 12px;
+      min-width: 52px;
+    }
+    .cd-num {
+      font-family: var(--font-display);
+      font-size: 1.4rem; font-weight: 600;
+      color: #fff; display: block; line-height: 1;
+    }
+    .cd-label {
+      font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.45); margin-top: 2px; display: block;
+    }
+    .cd-sep { font-size: 1.2rem; color: var(--pink-mid); font-weight: 600; align-self: flex-start; margin-top: 4px; }
+    .countdown-cta {
+      background: var(--pink); color: #fff;
+      text-decoration: none; font-size: 0.78rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 9px 20px; border-radius: 100px; font-weight: 500;
+      transition: background 0.2s;
+    }
+    .countdown-cta:hover { background: var(--pink-deep); }
+
+    /*  OCCASION SHOP ─ */
+    .occasion-section { background: var(--white); }
+    .occasion-chips {
+      display: flex; gap: 0.75rem; flex-wrap: wrap;
+      margin: 2rem 0;
+    }
+    .occ-chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 10px 20px; border-radius: 100px;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      font-size: 0.82rem; font-weight: 500; color: var(--ink-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      user-select: none;
+    }
+    .occ-chip:hover, .occ-chip.active {
+      background: var(--pink-light);
+      border-color: var(--pink);
+      color: var(--pink-deep);
+    }
+    .occ-chip.active { font-weight: 600; }
+
+    .occasion-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1rem;
+    }
+    .occ-card {
+      border-radius: 20px; overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--white);
+      transition: transform 0.25s, box-shadow 0.25s;
+      cursor: pointer;
+    }
+    .occ-card:hover { transform: translateY(-5px); box-shadow: 0 14px 36px rgba(232,121,154,0.13); }
+    .occ-card[data-hidden="true"] { display: none; }
+
+    .occ-visual {
+      height: 160px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem;
+      position: relative; overflow: hidden;
+    }
+    .occ-visual-dot {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(232,121,154,0.12) 1.5px, transparent 1.5px);
+      background-size: 18px 18px;
+    }
+    .occ-body { padding: 1rem 1.1rem 1.25rem; }
+    .occ-occasion {
+      font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--pink); font-weight: 500; margin-bottom: 4px;
+    }
+    .occ-name {
+      font-family: var(--font-display); font-size: 1.08rem; font-weight: 700; letter-spacing: -0.01em;
+      color: var(--ink); margin-bottom: 6px;
+    }
+    .occ-price {
+      font-size: 0.82rem; color: var(--ink-muted); font-weight: 400;
+    }
+    .occ-enquire {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 10px; font-size: 0.78rem; font-weight: 500;
+      color: var(--pink); text-decoration: none;
+      transition: gap 0.2s;
+    }
+    .occ-card:hover .occ-enquire { gap: 10px; }
+
+    /*  TRENDING  */
+    .trending-section { background: var(--pink-soft); }
+    .trending-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .trend-card {
+      background: var(--white); border-radius: 24px;
+      border: 1px solid var(--border); overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .trend-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(232,121,154,0.13); }
+    .trend-visual {
+      height: 200px; position: relative;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem;
+    }
+    .trend-visual-dot {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(232,121,154,0.1) 1.5px, transparent 1.5px);
+      background-size: 18px 18px;
+    }
+    .trend-fire {
+      position: absolute; top: 12px; left: 12px;
+      background: #FF4757; color: #fff;
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em;
+      padding: 4px 10px; border-radius: 100px;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .trend-views {
+      position: absolute; top: 12px; right: 12px;
+      background: rgba(255,255,255,0.92); color: var(--ink-muted);
+      font-size: 0.68rem; font-weight: 500;
+      padding: 4px 10px; border-radius: 100px;
+      border: 1px solid var(--border);
+    }
+    .trend-body { padding: 1.1rem 1.25rem 1.5rem; }
+    .trend-cat {
+      font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--pink); margin-bottom: 4px; font-weight: 500;
+    }
+    .trend-name {
+      font-family: var(--font-display); font-size: 1.08rem; font-weight: 700; letter-spacing: -0.01em;
+      color: var(--ink); margin-bottom: 6px;
+    }
+    .trend-price {
+      font-size: 0.82rem; color: var(--ink-muted); font-weight: 400; margin-bottom: 12px;
+    }
+    .trend-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--pink-light); color: var(--pink-deep);
+      text-decoration: none; font-size: 0.78rem; font-weight: 500;
+      padding: 8px 16px; border-radius: 100px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .trend-card:hover .trend-btn { background: var(--pink); color: #fff; }
+
+    /*  SIZE GUIDE MODAL  */
+    .size-modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 500;
+      background: rgba(42,26,31,0.55);
+      backdrop-filter: blur(4px);
+      align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .size-modal-overlay.open { display: flex; }
+
+    .size-modal {
+      background: var(--white); border-radius: 28px;
+      max-width: 680px; width: 100%;
+      max-height: 88vh; overflow-y: auto;
+      padding: 2.5rem;
+      position: relative;
+      animation: modal-in 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes modal-in { from { opacity: 0; transform: scale(0.9) translateY(20px); } to { opacity: 1; transform: none; } }
+
+    .modal-close {
+      position: absolute; top: 1.25rem; right: 1.25rem;
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--pink-light); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; color: var(--pink-deep);
+      transition: background 0.2s;
+    }
+    .modal-close:hover { background: var(--pink); color: #fff; }
+
+    .modal-title {
+      font-family: var(--font-display); font-size: 1.8rem; font-weight: 900; letter-spacing: -0.02em;
+      color: var(--ink); margin-bottom: 0.4rem;
+    }
+    .modal-sub { font-size: 0.88rem; color: var(--ink-muted); margin-bottom: 1.75rem; font-weight: 300; }
+
+    .size-tabs {
+      display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;
+    }
+    .size-tab {
+      padding: 8px 18px; border-radius: 100px; font-size: 0.8rem;
+      font-weight: 500; cursor: pointer; border: 1.5px solid var(--border);
+      background: var(--white); color: var(--ink-muted);
+      transition: all 0.2s;
+    }
+    .size-tab.active { background: var(--pink); color: #fff; border-color: var(--pink); }
+
+    .size-table-wrap { overflow-x: auto; }
+    .size-table {
+      width: 100%; border-collapse: collapse; font-size: 0.85rem;
+    }
+    .size-table th {
+      background: var(--pink-light); color: var(--pink-deep);
+      padding: 10px 14px; text-align: center; font-weight: 500;
+      font-size: 0.78rem; letter-spacing: 0.06em;
+    }
+    .size-table th:first-child { text-align: left; border-radius: 12px 0 0 0; }
+    .size-table th:last-child { border-radius: 0 12px 0 0; }
+    .size-table td { padding: 10px 14px; text-align: center; border-bottom: 1px solid var(--border-soft); color: var(--ink-muted); }
+    .size-table td:first-child { text-align: left; font-weight: 500; color: var(--ink); }
+    .size-table tr:last-child td { border-bottom: none; }
+    .size-table tr:hover td { background: var(--pink-soft); }
+
+    .size-tip {
+      margin-top: 1.25rem; padding: 1rem 1.25rem;
+      background: var(--pink-soft); border-radius: 14px;
+      border-left: 3px solid var(--pink);
+      font-size: 0.83rem; color: var(--ink-muted); line-height: 1.65;
+    }
+    .size-tip strong { color: var(--ink); }
+
+    .size-guide-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: transparent; border: 1.5px solid var(--border);
+      color: var(--ink-muted); font-size: 0.8rem; font-weight: 500;
+      padding: 8px 18px; border-radius: 100px; cursor: pointer;
+      transition: all 0.2s; text-decoration: none;
+    }
+    .size-guide-btn:hover { border-color: var(--pink); color: var(--pink); background: var(--pink-light); }
+
+    /*  FAQ ACCORDION ─ */
+    .faq-section { background: var(--white); }
+    .faq-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      margin-top: 3rem; background: var(--border-soft);
+      border: 1px solid var(--border-soft); border-radius: 20px; overflow: hidden;
+    }
+    .faq-item {
+      background: var(--white); padding: 0;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .faq-item:nth-last-child(-n+2) { border-bottom: none; }
+
+    .faq-q {
+      width: 100%; background: none; border: none;
+      padding: 1.4rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      cursor: pointer; text-align: left;
+      transition: background 0.2s;
+    }
+    .faq-q:hover { background: var(--pink-soft); }
+    .faq-q-text {
+      font-family: var(--font-display); font-size: 1rem; font-weight: 700; letter-spacing: -0.01em;
+      color: var(--ink); line-height: 1.3;
+    }
+    .faq-icon {
+      width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+      background: var(--pink-light); color: var(--pink-deep);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; transition: transform 0.3s, background 0.2s;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--pink); color: #fff; }
+
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), padding 0.3s;
+      padding: 0 1.5rem;
+    }
+    .faq-item.open .faq-a { max-height: 200px; padding: 0 1.5rem 1.25rem; }
+    .faq-a p { font-size: 0.88rem; color: var(--ink-muted); font-weight: 300; line-height: 1.75; }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; text-align: center; }
+      .hero p { margin: 0 auto 2.5rem; }
+      .hero-actions { justify-content: center; }
+      .hero-trust { justify-content: center; }
+      .hero-visual { order: -1; }
+      .hero-logo-wrap { width: 260px; }
+      .collections-grid { grid-template-columns: 1fr 1fr; }
+      .coll-card:first-child { grid-column: 1 / -1; grid-row: auto; }
+      .coll-card:first-child .coll-bg { min-height: 260px; }
+      .reels-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      section { padding: 70px 5vw; }
+      nav { padding: 0 5vw; }
+      .hero { padding: 100px 5vw 70px; gap: 3rem; }
+      footer { padding: 2.5rem 5vw; }
+      .trending-grid { grid-template-columns: repeat(2, 1fr); }
+      .occasion-grid { grid-template-columns: repeat(2, 1fr); }
+      .wa-catalogue-inner { grid-template-columns: 1fr; }
+      .wa-cat-phone { display: none; }
+      .meet-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .meet-badge { right: 0; bottom: -16px; }
+      .delivery-logos { gap: 0; }
+      .delivery-logo { padding: 0 1.25rem; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .trust-badge { padding: 8px 16px; }
+      .occasion-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+      .trending-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+      
+      /* Vertical Timeline for Mobile */
+      .steps-row { 
+        display: flex; flex-direction: column; 
+        gap: 2rem; position: relative; 
+        padding-left: 2.5rem; 
+      }
+      .steps-row::before {
+        display: block !important;
+        width: 1.5px; height: calc(100% - 100px);
+        top: 60px; left: calc(2.5rem + 29px);
+        transform: scaleY(0); transform-origin: top;
+      }
+      .steps-row.line-visible::before { transform: scaleY(1); }
+      .step-item { 
+        text-align: left; display: flex; align-items: flex-start; 
+        gap: 1.5rem; padding: 0; background: transparent; 
+        border: none; box-shadow: none; 
+      }
+      .step-num-wrap { flex-shrink: 0; margin-bottom: 0; }
+      .step-icon { display: none; }
+      .step-item h4 { margin-top: 10px; font-size: 1.25rem; }
+    }
+    @media (max-width: 600px) {
+      .collections-grid { grid-template-columns: 1fr; }
+      .trending-grid { grid-template-columns: 1fr; }
+      .occasion-grid { grid-template-columns: 1fr; }
+      .steps-row { 
+        padding-left: 1.5rem; 
+        gap: 2.5rem;
+      }
+      .steps-row::before {
+        left: calc(1.5rem + 29px);
+      }
+      .nav-cta { display: none; }
+    }
+
+    /* FULL ANIMATION SYSTEM */
+
+    /* Base keyframes */
+    @keyframes fadeUp       { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeDown     { from { opacity:0; transform:translateY(-24px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeLeft     { from { opacity:0; transform:translateX(40px); } to { opacity:1; transform:translateX(0); } }
+    @keyframes fadeRight    { from { opacity:0; transform:translateX(-40px); } to { opacity:1; transform:translateX(0); } }
+    @keyframes scaleIn      { from { opacity:0; transform:scale(0.88); } to { opacity:1; transform:scale(1); } }
+    @keyframes scaleInBounce{ from { opacity:0; transform:scale(0.7); } to { opacity:1; transform:scale(1); } }
+    @keyframes slideUp      { from { opacity:0; transform:translateY(50px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes blurIn       { from { opacity:0; filter:blur(8px); transform:translateY(16px); } to { opacity:1; filter:blur(0); transform:translateY(0); } }
+    @keyframes flipIn       { from { opacity:0; transform:rotateX(-20deg) translateY(20px); } to { opacity:1; transform:rotateX(0) translateY(0); } }
+    @keyframes countUp      { from { opacity:0; transform:scale(0.5) translateY(20px); } to { opacity:1; transform:scale(1) translateY(0); } }
+    @keyframes shimmer      { 0%,100% { opacity:0.6; } 50% { opacity:1; } }
+    @keyframes drawLine     { from { width:0; } to { width:100%; } }
+    @keyframes popIn        { 0% { opacity:0; transform:scale(0.5) rotate(-8deg); } 70% { transform:scale(1.08) rotate(2deg); } 100% { opacity:1; transform:scale(1) rotate(0); } }
+
+    /* Scroll reveal — base */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1),
+                  transform 0.7s cubic-bezier(0.4,0,0.2,1);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+    .reveal-delay-6 { transition-delay: 0.6s; }
+
+    /* Variant reveal types */
+    .reveal-left  { opacity:0; transform:translateX(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal-right { opacity:0; transform:translateX(-40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal-scale { opacity:0; transform:scale(0.88); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34,1.56,0.64,1); }
+    .reveal-blur  { opacity:0; filter:blur(6px); transform:translateY(14px); transition: opacity 0.7s ease, filter 0.7s ease, transform 0.7s ease; }
+    .reveal-left.visible, .reveal-right.visible, .reveal-scale.visible, .reveal-blur.visible {
+      opacity:1; transform:none; filter:none;
+    }
+
+    /* HERO — staggered entrance */
+    .hero-badge    { animation: fadeDown 0.6s ease 0.2s both; }
+    .hero h1       { animation: blurIn 0.8s ease 0.35s both; }
+    .hero p        { animation: fadeUp 0.6s ease 0.55s both; }
+    .hero-actions  { animation: fadeUp 0.6s ease 0.7s both; }
+    .hero-trust    { animation: fadeUp 0.6s ease 0.85s both; }
+    .logo-ring     { animation: float 5s ease-in-out infinite, scaleIn 0.9s cubic-bezier(0.34,1.56,0.64,1) 0.4s both; }
+    .petal-1       { animation: scaleIn 1s ease 0.6s both; }
+    .petal-2       { animation: scaleIn 1s ease 0.8s both; }
+
+    /* NAV — slide down */
+    nav { animation: fadeDown 0.5s ease both; }
+
+    /* MARQUEE — shimmer on items */
+    .marquee-item { animation: shimmer 3s ease-in-out infinite; }
+    .marquee-item:nth-child(2n)  { animation-delay: 0.5s; }
+    .marquee-item:nth-child(3n)  { animation-delay: 1s; }
+    .marquee-item:nth-child(4n)  { animation-delay: 1.5s; }
+
+    /* TRUST BADGES — pop in */
+    .trust-badge { transition: transform 0.2s, opacity 0.2s; }
+    .trust-badge:hover { transform: translateY(-3px); }
+
+    /* COUNTDOWN — number pulse */
+    .cd-num { animation: shimmer 1s ease-in-out infinite; }
+    .cd-unit:nth-child(2) .cd-num { animation-delay: 0.25s; }
+    .cd-unit:nth-child(3) .cd-num { animation-delay: 0.5s; }
+    .cd-unit:nth-child(4) .cd-num { animation-delay: 0.75s; }
+
+    /* USP CARDS — stagger scale bounce */
+    .usp-card {
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease, background 0.2s;
+    }
+    .usp-card:hover { transform: translateY(-8px) scale(1.02); }
+    .usp-icon { transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+    .usp-card:hover .usp-icon { transform: scale(1.2) rotate(-5deg); }
+
+    /* COLLECTION CARDS — lift + overlay */
+    .coll-card { transition: transform 0.35s ease, box-shadow 0.35s ease; }
+    .coll-card:hover { transform: translateY(-6px) scale(1.01); box-shadow: 0 20px 48px rgba(232,121,154,0.18); }
+    .coll-name { transition: color 0.2s; }
+    .coll-card:hover .coll-name { color: var(--pink-deep); }
+
+    /* OCCASION CHIPS — bounce active */
+    .occ-chip { transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1); }
+    .occ-chip:hover { transform: translateY(-2px) scale(1.05); }
+    .occ-chip.active { transform: scale(1.05); }
+
+    /* OCCASION CARDS */
+    .occ-card { transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease; }
+    .occ-card:hover { transform: translateY(-8px) scale(1.01); }
+    .occ-enquire { transition: letter-spacing 0.2s ease, color 0.2s; }
+    .occ-card:hover .occ-enquire { letter-spacing: 0.06em; }
+
+    /* TRENDING CARDS */
+    .trend-card { transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease; }
+    .trend-card:hover { transform: translateY(-8px); box-shadow: 0 24px 52px rgba(232,121,154,0.18); }
+    .trend-fire { animation: shimmer 1.5s ease-in-out infinite; }
+    .trend-btn { transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1); }
+    .trend-card:hover .trend-btn { transform: scale(1.05); }
+
+    /* REEL CARDS — tilt on hover */
+    .reel-card { transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease; }
+    .reel-card:hover { transform: translateY(-8px) rotate(0.5deg); }
+    .reel-play-btn { transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), background 0.2s; }
+    .reel-card:hover .reel-play-btn { transform: scale(1.18); }
+    .reel-watch-btn { transition: letter-spacing 0.2s, color 0.2s; }
+    .reel-card:hover .reel-watch-btn { letter-spacing: 0.05em; color: var(--pink-deep); }
+
+    /* ABOUT — stat cards */
+    .about-card {
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), background 0.2s;
+    }
+    .about-card:hover { transform: translateY(-5px) scale(1.03); }
+    .about-card-num { display: block; }
+
+    /* REVIEWS — card tilt */
+    .review-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .review-card:hover { transform: translateY(-5px) rotate(-0.5deg); box-shadow: 0 16px 40px rgba(232,121,154,0.16); }
+    .review-quote { transition: transform 0.3s ease; }
+    .review-card:hover .review-quote { transform: scale(1.1) translateX(-4px); }
+
+    /* FAQ ITEMS */
+    .faq-item { transition: transform 0.2s ease; }
+    .faq-item:hover { transform: translateX(4px); }
+
+    /* WA CATALOGUE section */
+    .wa-cat-btn {
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s;
+    }
+    .wa-cat-btn:hover { transform: translateY(-4px) scale(1.04); }
+    .wa-cat-feature { transition: transform 0.2s ease; }
+    .wa-cat-feature:hover { transform: translateX(4px); }
+
+    /* MEET section — photo */
+    .meet-badge { animation: popIn 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.8s both; }
+    .meet-tag { transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), background 0.2s; }
+    .meet-tag:hover { transform: translateY(-3px) scale(1.05); background: rgba(232,121,154,0.25); }
+
+    /* DELIVERY logos */
+    .delivery-logo {
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;
+    }
+    .delivery-logo:hover { transform: translateY(-4px) scale(1.08); opacity: 1; }
+
+    /* CTA section — pulse on main button */
+    .btn-white {
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s;
+    }
+    .btn-white:hover { transform: translateY(-3px) scale(1.04); }
+
+    /* FLOATING WA button */
+    .wa-float { transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s; }
+
+    /* SCROLL TO TOP */
+    #scrollTop { transition: opacity 0.3s, transform 0.3s cubic-bezier(0.34,1.56,0.64,1), background 0.2s; }
+    #scrollTop:hover { transform: translateY(-4px) scale(1.1); }
+
+    /* SIZE MODAL */
+    .size-tab { transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1); }
+    .size-tab:hover { transform: translateY(-2px); }
+
+    /* PAGE LOADER text pulse */
+    .loader-text { animation: shimmer 1.2s ease-in-out infinite; }
+
+    /* Section label underline draw */
+    .section-label::after {
+      content: '';
+      display: block;
+      height: 1.5px;
+      background: var(--pink);
+      width: 0;
+      transition: width 0.6s ease 0.3s;
+      margin-top: 4px;
+      border-radius: 2px;
+    }
+    .reveal.visible .section-label::after,
+    .section-label::after { width: 32px; }
+
+    /* Hero h1 word-by-word shimmer on load */
+    .hero h1 span { display: inline-block; }
+
+
+    /* Trending card image */
+    .trend-img-wrap { padding: 0; overflow: hidden; position: relative; }
+    .trend-img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform 0.4s ease;
+    }
+    .trend-card:hover .trend-img { transform: scale(1.05); }
+    .trend-img-placeholder {
+      width: 100%; height: 100%;
+      min-height: 200px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 8px; background: var(--pink-soft);
+      font-size: 1.8rem; color: var(--ink-faint); text-align: center;
+    }
+    .trend-img-placeholder span {
+      font-size: 0.7rem; font-family: var(--font-body);
+      font-weight: 500; color: var(--pink);
+      line-height: 1.5; letter-spacing: 0.04em;
+    }
+
+    /* Occasion card image */
+    .occ-img-wrap { padding: 0; overflow: hidden; }
+    .occ-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .occ-card:hover .occ-img { transform: scale(1.05); }
+    .occ-img-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 8px; background: var(--pink-soft);
+      font-size: 1.8rem; color: var(--ink-faint);
+      text-align: center;
+    }
+    .occ-img-placeholder span {
+      font-size: 0.7rem; font-family: var(--font-body);
+      font-weight: 500; color: var(--pink);
+      line-height: 1.5; letter-spacing: 0.04em;
+    }
+
+    /* COMPREHENSIVE TYPOGRAPHY OVERRIDES */
+
+    /* Marquee */
+    .marquee-item { font-size: 0.68rem; letter-spacing: 0.22em; font-weight: 600; }
+
+    /* Trust badges */
+    .trust-badge-text strong { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.01em; }
+    .trust-badge-text span { font-size: 0.7rem; letter-spacing: 0.02em; }
+
+    /* Countdown */
+    .countdown-text { font-size: 0.8rem; letter-spacing: 0.14em; font-weight: 600; }
+    .cd-num { font-family: var(--font-display); font-size: 1.5rem; font-weight: 900; letter-spacing: -0.02em; }
+    .cd-label { font-size: 0.55rem; letter-spacing: 0.16em; font-weight: 500; }
+
+    /* USP cards */
+    .usp-card h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 0.5rem; }
+    .usp-card p { font-size: 0.9rem; color: var(--ink-muted); font-weight: 300; line-height: 1.75; }
+
+    /* Collection cards */
+    .coll-tag { font-size: 0.65rem; letter-spacing: 0.18em; font-weight: 600; text-transform: uppercase; }
+    .coll-name { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.01em; }
+
+    /* Occasion cards */
+    .occ-occasion { font-size: 0.65rem; letter-spacing: 0.18em; font-weight: 600; }
+    .occ-name { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em; }
+    .occ-price { font-size: 0.82rem; font-weight: 400; }
+    .occ-enquire { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; }
+
+    /* Trending cards */
+    .trend-cat { font-size: 0.65rem; letter-spacing: 0.18em; font-weight: 600; }
+    .trend-name { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em; }
+    .trend-price { font-size: 0.82rem; font-weight: 400; }
+    .trend-btn { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em; }
+    .trend-fire { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.06em; }
+
+    /* About section */
+    .about-text { font-size: 0.98rem; line-height: 1.9; font-weight: 300; letter-spacing: 0.01em; }
+    .about-card-num { font-family: var(--font-display); font-size: 2.2rem; font-weight: 900; letter-spacing: -0.02em; }
+    .about-card-label { font-size: 0.72rem; letter-spacing: 0.1em; font-weight: 400; }
+
+    /* Steps */
+    .step-num { font-family: var(--font-display); font-weight: 900; letter-spacing: -0.02em; }
+    .step-item h4 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 0.4rem; }
+    .step-item p { font-size: 0.85rem; color: var(--ink-muted); font-weight: 300; line-height: 1.7; }
+
+    /* Reviews */
+    .review-text { font-family: var(--font-display); font-size: 1rem; font-style: italic; font-weight: 400; line-height: 1.8; letter-spacing: 0.005em; }
+    .reviewer-name { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.02em; }
+    .reviewer-loc { font-size: 0.73rem; font-weight: 300; letter-spacing: 0.04em; }
+
+    /* FAQ */
+    .faq-q-text { font-family: var(--font-display); font-size: 1rem; font-weight: 700; letter-spacing: -0.005em; line-height: 1.3; }
+    .faq-a p { font-size: 0.9rem; font-weight: 300; line-height: 1.8; letter-spacing: 0.01em; }
+
+    /* CTA section */
+    .cta-sub { font-size: 1rem; font-weight: 300; line-height: 1.85; letter-spacing: 0.01em; }
+    .btn-white { font-size: 0.75rem; letter-spacing: 0.14em; font-weight: 600; }
+    .btn-outline-white { font-size: 0.75rem; letter-spacing: 0.14em; font-weight: 600; }
+
+    /* Footer */
+    .footer-brand { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; }
+    .footer-links a { font-size: 0.75rem; letter-spacing: 0.1em; font-weight: 400; }
+    .footer-copy { font-size: 0.7rem; letter-spacing: 0.06em; }
+
+    /* Hero tags */
+    .hero-tag { font-size: 0.76rem; font-weight: 600; letter-spacing: 0.02em; }
+
+    /* Size modal */
+    .modal-title { font-family: var(--font-display); font-weight: 900; letter-spacing: -0.02em; }
+    .size-table th { font-size: 0.72rem; letter-spacing: 0.1em; font-weight: 600; }
+    .size-table td { font-size: 0.85rem; font-weight: 300; }
+    .size-table td:first-child { font-weight: 600; }
+    .size-tip { font-size: 0.85rem; line-height: 1.7; }
+
+    /*  PAGE LOADER ─ */
+    #page-loader {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--white);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 1.5rem;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #page-loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .loader-logo {
+      width: 90px; height: 90px; border-radius: 50%;
+      overflow: hidden; border: 3px solid var(--pink-light);
+      animation: loader-pulse 1.4s ease-in-out infinite;
+    }
+    .loader-logo img { width: 100%; height: 100%; object-fit: cover; }
+    @keyframes loader-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(232,121,154,0.4); }
+      50%       { box-shadow: 0 0 0 18px rgba(232,121,154,0); }
+    }
+    .loader-text {
+      font-family: var(--font-display);
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--ink); letter-spacing: -0.01em;
+    }
+    .loader-text em { font-style: italic; color: var(--pink); }
+    .loader-bar {
+      width: 120px; height: 2px;
+      background: var(--pink-light); border-radius: 2px; overflow: hidden;
+    }
+    .loader-bar-fill {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--pink-mid), var(--pink));
+      border-radius: 2px;
+      animation: loader-fill 1.8s cubic-bezier(0.4,0,0.2,1) forwards;
+    }
+    @keyframes loader-fill { from { width: 0%; } to { width: 100%; } }
+
+
+    /*  WHATSAPP CATALOGUE  */
+    .wa-catalogue-section {
+      background: var(--white);
+      padding: 80px 5vw;
+    }
+    .wa-catalogue-inner {
+      background: linear-gradient(135deg, #1A5C3A 0%, #128C54 60%, #25D366 100%);
+      border-radius: 32px;
+      padding: 3.5rem 3rem;
+      display: grid; grid-template-columns: 1fr auto;
+      align-items: center; gap: 3rem;
+      position: relative; overflow: hidden;
+    }
+    .wa-catalogue-inner::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 280px; height: 280px; border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+    .wa-catalogue-inner::after {
+      content: '';
+      position: absolute; bottom: -80px; right: 120px;
+      width: 200px; height: 200px; border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+    .wa-cat-label {
+      font-size: 0.68rem; letter-spacing: 0.24em; text-transform: uppercase;
+      color: rgba(255,255,255,0.65); font-weight: 600; margin-bottom: 0.6rem;
+    }
+    .wa-cat-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 900; color: #fff;
+      line-height: 1.1; letter-spacing: -0.02em;
+      margin-bottom: 0.8rem;
+    }
+    .wa-cat-title em { font-style: italic; color: #A8F0C6; }
+    .wa-cat-sub {
+      font-size: 0.95rem; color: rgba(255,255,255,0.7);
+      font-weight: 300; line-height: 1.7; max-width: 480px;
+      margin-bottom: 1.75rem;
+    }
+    .wa-cat-features {
+      display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 2rem;
+    }
+    .wa-cat-feature {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 0.82rem; color: rgba(255,255,255,0.8); font-weight: 400;
+    }
+    .wa-cat-feature-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #A8F0C6; flex-shrink: 0;
+    }
+    .wa-cat-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #fff; color: #1A5C3A;
+      text-decoration: none; font-size: 0.8rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 15px 30px; border-radius: 100px; font-weight: 700;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative; z-index: 1;
+    }
+    .wa-cat-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.2); }
+    .wa-cat-phone {
+      position: relative; z-index: 1; flex-shrink: 0;
+    }
+    .wa-phone-mockup {
+      width: 140px; background: rgba(255,255,255,0.12);
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 24px; padding: 1rem 0.75rem;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .wa-phone-header {
+      display: flex; align-items: center; gap: 8px;
+      padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+    .wa-phone-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: #A8F0C6; overflow: hidden; flex-shrink: 0;
+    }
+    .wa-phone-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .wa-phone-name { font-size: 0.72rem; font-weight: 600; color: #fff; }
+    .wa-phone-status { font-size: 0.6rem; color: rgba(255,255,255,0.55); }
+    .wa-bubble {
+      padding: 7px 10px; border-radius: 12px 12px 12px 2px;
+      background: rgba(255,255,255,0.15);
+      font-size: 0.68rem; color: rgba(255,255,255,0.9); line-height: 1.4;
+    }
+    .wa-bubble.sent {
+      background: #A8F0C6; color: #1A5C3A;
+      border-radius: 12px 12px 2px 12px; align-self: flex-end;
+    }
+
+    /*  MEET THE OWNER  */
+    .meet-section { background: var(--ink); padding: 90px 5vw; }
+    .meet-grid {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 5rem; align-items: center;
+    }
+    .meet-photo-wrap { position: relative; }
+    .meet-photo {
+      width: 100%; aspect-ratio: 3/4;
+      border-radius: 28px; overflow: hidden;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .meet-photo img {
+      width: 100%; height: 100%; object-fit: cover;
+      object-position: top;
+    }
+    .meet-photo-placeholder {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 12px;
+      color: rgba(255,255,255,0.3); font-size: 2.5rem; text-align: center;
+      padding: 2rem;
+    }
+    .meet-photo-placeholder span {
+      font-size: 0.75rem; font-family: var(--font-body);
+      color: rgba(255,255,255,0.25); letter-spacing: 0.06em;
+      line-height: 1.6;
+    }
+    .meet-badge {
+      position: absolute; bottom: -16px; right: -16px;
+      background: var(--pink); color: #fff;
+      padding: 12px 18px; border-radius: 18px;
+      font-family: var(--font-display); font-size: 0.9rem;
+      font-weight: 700; letter-spacing: -0.01em;
+      box-shadow: 0 8px 24px rgba(232,121,154,0.4);
+    }
+    .meet-badge span {
+      display: block; font-family: var(--font-body);
+      font-size: 0.62rem; letter-spacing: 0.1em;
+      text-transform: uppercase; opacity: 0.8; font-weight: 400;
+      margin-top: 2px;
+    }
+    .meet-section .section-label { color: var(--pink-mid); }
+    .meet-section .section-title { color: #fff; letter-spacing: -0.02em; }
+    .meet-section .section-title em { color: var(--pink-mid); }
+    .meet-quote {
+      font-family: var(--font-display);
+      font-size: 1.5rem; font-style: italic; font-weight: 600;
+      color: rgba(255,255,255,0.9); line-height: 1.45;
+      border-left: 3px solid var(--pink);
+      padding-left: 1.25rem; margin: 1.75rem 0;
+      letter-spacing: -0.01em;
+    }
+    .meet-body {
+      font-size: 0.95rem; color: rgba(255,255,255,0.55);
+      font-weight: 300; line-height: 1.9; margin-bottom: 1.25rem;
+    }
+    .meet-tags {
+      display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1.75rem;
+    }
+    .meet-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(232,121,154,0.15);
+      border: 1px solid rgba(232,121,154,0.25);
+      color: var(--pink-mid); font-size: 0.75rem; font-weight: 500;
+      padding: 6px 14px; border-radius: 100px; letter-spacing: 0.04em;
+    }
+
+    /*  DELIVERY PARTNERS ─ */
+    .delivery-strip {
+      background: var(--white);
+      border-top: 1px solid var(--border-soft);
+      border-bottom: 1px solid var(--border-soft);
+      padding: 40px 5vw;
+    }
+    .delivery-label {
+      text-align: center;
+      font-size: 0.68rem; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--ink-faint); font-weight: 600; margin-bottom: 2rem;
+    }
+    .delivery-logos {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0; flex-wrap: wrap;
+    }
+    .delivery-logo {
+      padding: 0 2.5rem;
+      border-right: 1px solid var(--border-soft);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 6px;
+      opacity: 0.55; transition: opacity 0.2s;
+    }
+    .delivery-logo:last-child { border-right: none; }
+    .delivery-logo:hover { opacity: 1; }
+    .delivery-logo-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 0.9rem; letter-spacing: -0.02em;
+    }
+    .delivery-logo-name {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em;
+      color: var(--ink-muted); text-transform: uppercase;
+    }
+    /* brand colours */
+    .dl-delhivery { background: #E8F0FE; color: #1A56DB; }
+    .dl-indiapost { background: #FEF3C7; color: #B45309; }
+    .dl-dhl       { background: #FEF9C3; color: #CA8A04; }
+    .dl-bluedart  { background: #EDE9FE; color: #7C3AED; }
+    .dl-ecom      { background: #FCE7F3; color: #BE185D; }
+    .dl-fedex     { background: #EFF6FF; color: #1D4ED8; }
+
+    /*  ALL VISUAL POLISH FIXES  */
+
+    /* Fix body overflow */
+    body { overflow-x: hidden; }
+
+    /* Hero — soft radial mesh background */
+    .hero {
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 50%, rgba(232,121,154,0.10) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(242,160,184,0.08) 0%, transparent 60%),
+        var(--white);
+    }
+
+    /* Hero logo ring — layered glow rings */
+    .logo-ring {
+      box-shadow:
+        0 0 0 12px rgba(232,121,154,0.06),
+        0 0 0 28px rgba(232,121,154,0.04),
+        0 24px 60px rgba(232,121,154,0.18);
+    }
+
+    /* Hero tags — subtle entrance animation */
+    .hero-tag { animation: tag-in 0.6s cubic-bezier(0.34,1.56,0.64,1) both; }
+    .hero-tag.tag-love { animation-delay: 0.3s; }
+    .hero-tag.tag-ship { animation-delay: 0.5s; }
+    @keyframes tag-in {
+      from { opacity: 0; transform: translateY(10px) scale(0.92); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* USP — first card gets accent treatment */
+    .usp-card:first-child {
+      background: linear-gradient(135deg, var(--pink-light) 0%, #fff 60%);
+      border-color: var(--pink-mid);
+    }
+    .usp-card:first-child .usp-icon { background: var(--pink); }
+
+    /* Collection cards — image-style hover overlay */
+    .coll-card::after {
+      content: 'Enquire on WhatsApp →';
+      position: absolute; inset: 0;
+      background: rgba(232,121,154,0.85);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      opacity: 0; transition: opacity 0.25s ease;
+      border-radius: 24px;
+    }
+    .coll-card:hover::after { opacity: 1; }
+
+    /* Cards — richer shadows */
+    .usp-card:hover {
+      box-shadow: 0 20px 50px rgba(232,121,154,0.16), 0 4px 12px rgba(0,0,0,0.04);
+      transform: translateY(-6px);
+    }
+    .review-card:hover {
+      box-shadow: 0 16px 44px rgba(232,121,154,0.14), 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .trend-card:hover {
+      box-shadow: 0 20px 50px rgba(232,121,154,0.16), 0 4px 12px rgba(0,0,0,0.04);
+    }
+    .occ-card:hover {
+      box-shadow: 0 16px 44px rgba(232,121,154,0.14);
+    }
+
+    /* Step cards — stronger hover ring */
+    .step-item:hover {
+      border-color: var(--pink);
+      box-shadow: 0 0 0 3px rgba(232,121,154,0.12), 0 20px 48px rgba(232,121,154,0.14);
+    }
+
+    /* USP section — subtle diagonal pattern */
+    .usp-section {
+      background:
+        repeating-linear-gradient(
+          -45deg,
+          transparent,
+          transparent 40px,
+          rgba(232,121,154,0.025) 40px,
+          rgba(232,121,154,0.025) 41px
+        ),
+        var(--pink-soft);
+    }
+
+    /* Reviews section — gradient bg */
+    .reviews-section {
+      background: linear-gradient(180deg, var(--pink-soft) 0%, var(--white) 100%);
+    }
+
+    /* Marquee — darker, more premium */
+    .marquee-strip {
+      background: linear-gradient(90deg, var(--pink-light) 0%, #fce4ec 50%, var(--pink-light) 100%);
+    }
+
+    /* Section spacing */
+    section + section { padding-top: 70px; }
+
+    /* Trending section — mesh bg */
+    .trending-section {
+      background:
+        radial-gradient(ellipse 70% 60% at 90% 30%, rgba(232,121,154,0.08) 0%, transparent 65%),
+        var(--pink-soft);
+    }
+
+    /* About section — richer dark with grain feel */
+    .about-section {
+      background:
+        radial-gradient(ellipse 60% 80% at 0% 50%, rgba(232,121,154,0.08) 0%, transparent 60%),
+        var(--ink);
+    }
+
+    /* Meet section — match about */
+    .meet-section {
+      background:
+        radial-gradient(ellipse 50% 70% at 100% 50%, rgba(232,121,154,0.07) 0%, transparent 60%),
+        var(--ink);
+    }
+
+    /* WA Catalogue section separator */
+    .wa-catalogue-section {
+      position: relative;
+    }
+    .wa-catalogue-section::before {
+      content: '';
+      position: absolute; top: 0; left: 5vw; right: 5vw;
+      height: 1px; background: var(--border-soft);
+    }
+
+    /* Trust number counter animation */
+    .trust-number {
+      background: linear-gradient(135deg, var(--ink) 0%, var(--pink-deep) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Scroll to top button */
+    #scrollTop {
+      position: fixed; bottom: 98px; right: 28px; z-index: 998;
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--white); border: 1.5px solid var(--border);
+      color: var(--pink); font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; opacity: 0; pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s, background 0.2s;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    #scrollTop.visible { opacity: 1; pointer-events: all; }
+    #scrollTop:hover { background: var(--pink); color: #fff; transform: translateY(-3px); }
+
+    /* FAQ section — soft bg */
+    .faq-section {
+      background:
+        radial-gradient(ellipse 50% 60% at 50% 0%, rgba(232,121,154,0.05) 0%, transparent 70%),
+        var(--white);
+    }
+
+    /* Footer — slightly richer */
+    footer {
+      background: linear-gradient(135deg, #1A0F16 0%, #2A1A1F 100%);
+    }
+
+    /* CTA section — add subtle texture */
+    .cta-section {
+      background:
+        radial-gradient(ellipse 80% 100% at 50% 100%, rgba(201,86,122,0.5) 0%, transparent 70%),
+        var(--pink);
+    }
+
+    /* Nav — slightly stronger border on scroll (handled via JS) */
+    nav.scrolled {
+      box-shadow: 0 4px 24px rgba(232,121,154,0.1);
+    }
+
+    /* Image hover on meet section */
+    .meet-photo img { transition: transform 0.5s ease; }
+    .meet-photo:hover img { transform: scale(1.03); }
+
+    /* Delivery logos — cleaner sizing */
+    .delivery-logo-icon { font-size: 0.82rem; font-weight: 800; }
+
+    /* Review quote mark */
+    .review-quote {
+      font-size: 3.5rem;
+      line-height: 0.8;
+      margin-bottom: 0.5rem;
+      opacity: 0.35;
+    }
+
+    /* Featured review card */
+    .review-card.featured {
+      background: linear-gradient(135deg, var(--pink-light) 0%, #fff 70%);
+    }
+
+    /* WA phone mockup text size fix */
+    .wa-bubble { font-size: 0.7rem; line-height: 1.45; }
+
+    /* LAYOUT CLEANUP — inspired by clean editorial reference */
+
+    /* More generous max-width container feel */
+    section { padding: 100px 8vw; }
+    nav { padding: 0 8vw; }
+    .hero { padding: 120px 8vw 100px; }
+    .marquee-strip, .trust-strip, .delivery-strip { padding-left: 8vw; padding-right: 8vw; }
+    .countdown-banner { padding-left: 8vw; padding-right: 8vw; }
+
+    /* Section header — left-aligned with more breathing room */
+    .section-header-row {
+      display: flex; align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1rem;
+    }
+    .section-label { margin-bottom: 0.5rem; }
+    .section-title { margin-bottom: 0.6rem; }
+    .section-sub { margin-bottom: 0; }
+
+    /* Cards — cleaner, less border-heavy */
+    .usp-card {
+      border-radius: 20px;
+      border: none;
+      box-shadow: 0 2px 16px rgba(232,121,154,0.07);
+      padding: 2.25rem 2rem;
+    }
+    .usp-icon {
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Trending grid — 4 even columns, cleaner cards */
+    .trending-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    .trend-card {
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0 2px 20px rgba(232,121,154,0.08);
+    }
+    .trend-visual { height: 220px; }
+    .trend-body { padding: 1.25rem 1.5rem 1.75rem; }
+    .trend-name { font-size: 1rem; margin-bottom: 4px; }
+    .trend-price { font-size: 0.88rem; font-weight: 500; color: var(--ink); margin-bottom: 14px; }
+    .trend-btn {
+      padding: 9px 20px;
+      font-size: 0.76rem; font-weight: 600; letter-spacing: 0.06em;
+    }
+
+    /* Occasion grid — 3 columns, taller cards */
+    .occasion-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .occ-visual { height: 200px; }
+    .occ-card { border: none; box-shadow: 0 2px 20px rgba(232,121,154,0.08); border-radius: 20px; }
+    .occ-body { padding: 1.25rem 1.5rem 1.5rem; }
+    .occ-name { font-size: 1.05rem; margin-bottom: 5px; }
+    .occ-price { font-size: 0.88rem; font-weight: 500; color: var(--ink); }
+
+    /* Review cards — cleaner */
+    .review-card {
+      border: none;
+      box-shadow: 0 2px 20px rgba(232,121,154,0.08);
+      border-radius: 20px;
+      padding: 2rem;
+    }
+
+    /* FAQ — single column, cleaner */
+    .faq-grid {
+      grid-template-columns: 1fr;
+      max-width: 780px;
+      background: transparent;
+      border: none;
+      gap: 0.75rem;
+    }
+    .faq-item {
+      border-radius: 16px !important;
+      border: 1px solid var(--border) !important;
+      border-bottom: 1px solid var(--border) !important;
+      overflow: hidden;
+    }
+    .faq-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--border) !important; }
+
+    /* Collections — tighter labels */
+    .collections-grid { gap: 1rem; }
+    .coll-bg { padding: 1.25rem; }
+
+    /* Hero — more breathing */
+    .hero { gap: 5rem; }
+    .hero-trust { margin-top: 0; }
+
+    /* About grid — tighter */
+    .about-grid { gap: 6rem; }
+
+    /* Steps — wider cards */
+    .steps-row { gap: 1.25rem; margin-top: 4rem; }
+    .step-item { padding: 2.25rem 1.5rem 2rem; }
+
+    /* Trust badges — more space */
+    .trust-badge { padding: 12px 2.5rem; }
+    .trust-badges { gap: 0; }
+
+    /* Delivery logos */
+    .delivery-logos { gap: 0; }
+    .delivery-logo { padding: 0 2rem; }
+
+    /* WA catalogue — tighter inner padding */
+    .wa-catalogue-inner { padding: 4rem 3.5rem; gap: 4rem; }
+
+    /* Meet section grid */
+    .meet-grid { gap: 6rem; }
+
+    /* Footer — more padding */
+    footer { padding: 3rem 8vw; }
+
+    /* Reels grid */
+    .reels-grid { gap: 1.5rem; }
+
+    /* Remove double borders from frosted cards */
+    .usp-card,
+    .trend-card,
+    .occ-card,
+    .review-card {
+      border-color: transparent !important;
+    }
+
+    /* Cleaner section spacing — no double padding between consecutive sections */
+    section + section { padding-top: 80px; }
+    section + .trust-strip,
+    section + .delivery-strip,
+    section + .countdown-banner { padding-top: 0; }
+
+    /* All plain white/pink-soft sections become transparent */
+    .usp-section,
+    .order-section,
+    .reels-section,
+    .occasion-section,
+    .faq-section,
+    .delivery-strip,
+    .trust-strip,
+    .wa-catalogue-section {
+      background: transparent !important;
+    }
+
+    /* Sections with subtle overlay to add depth without killing gradient */
+    .trending-section,
+    .reviews-section {
+      background: rgba(255,255,255,0.28) !important;
+    }
+
+    /* Hero — fully transparent so gradient shows */
+    .hero {
+      background: transparent !important;
+    }
+
+    /* Dark sections — keep their dark bg, they're intentional contrast breaks */
+    .about-section { background: rgba(42,26,31,0.88) !important; }
+    .meet-section  { background: rgba(42,26,31,0.88) !important; }
+
+    /* CTA section — keep pink, but slightly transparent */
+    .cta-section {
+      background: rgba(232,121,154,0.82) !important;
+      backdrop-filter: blur(8px);
+    }
+
+    /* Cards — frosted glass effect over the gradient */
+    .usp-card,
+    .step-item,
+    .review-card,
+    .trend-card,
+    .occ-card,
+    .faq-item {
+      background: rgba(255,255,255,0.72) !important;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-color: rgba(255,255,255,0.55) !important;
+    }
+    .usp-card:hover,
+    .trend-card:hover,
+    .occ-card:hover {
+      background: rgba(255,255,255,0.88) !important;
+    }
+
+    /* Featured cards slightly more opaque */
+    .review-card.featured {
+      background: rgba(253,232,239,0.80) !important;
+    }
+    .usp-card:first-child {
+      background: rgba(253,232,239,0.75) !important;
+    }
+
+    /* Nav — frosted glass */
+    nav {
+      background: rgba(255,255,255,0.72) !important;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    /* Trust strip and delivery strip — semi-transparent */
+    .trust-strip,
+    .delivery-strip {
+      background: rgba(255,255,255,0.45) !important;
+      backdrop-filter: blur(8px);
+    }
+
+    /* Marquee — soft pink overlay */
+    .marquee-strip {
+      background: rgba(242,160,184,0.35) !important;
+      backdrop-filter: blur(4px);
+    }
+
+    /* Size modal — opaque white */
+    .size-modal { background: rgba(255,255,255,0.96) !important; }
+
+    /* Footer — keep dark */
+    footer { background: linear-gradient(135deg,#1A0F16 0%,#2A1A1F 100%) !important; }
+
+    /* Page loader — match gradient */
+    #page-loader {
+      background: radial-gradient(ellipse 90% 70% at 50% 40%, #ffffff 0%, #fde8ef 28%, #f9c0cf 58%, #f2a0b8 100%) !important;
+    }
+
+    /* WA catalogue inner keeps its own green */
+    .wa-catalogue-inner { background: linear-gradient(135deg,#1A5C3A 0%,#128C54 60%,#25D366 100%); }
+
+  </style>
+</head>
+<body>
+
+<!-- PAGE LOADER -->
+<div id="page-loader">
+  <div class="loader-logo">
+    <img src="logo.png" alt="Sisters Stylo Studio" />
+  </div>
+  <div class="loader-text">Sisters Stylo <em>Studio</em></div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/919365017159" class="wa-float" target="_blank" aria-label="Chat on WhatsApp">
+  <span class="wa-tooltip">Chat with us!</span>
+  <svg viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+</a>
+
+<!-- SIZE GUIDE MODAL -->
+<div class="size-modal-overlay" id="sizeModal">
+  <div class="size-modal">
+    <button class="modal-close" id="sizeModalClose">✕</button>
+    <h2 class="modal-title">Size <em style="font-style:italic;color:var(--pink)">Guide</em></h2>
+    <p class="modal-sub">All measurements are in inches. When in doubt, size up for a comfortable fit.</p>
+    <div class="size-tabs">
+      <button class="size-tab active" data-table="saree">Sarees / Mekhela</button>
+      <button class="size-tab" data-table="kurti">Kurtis &amp; Sets</button>
+      <button class="size-tab" data-table="lehenga">Lehengas</button>
+    </div>
+    <div class="size-table-wrap">
+      <table class="size-table" id="sizeTableSaree">
+        <thead><tr><th>Size</th><th>Bust</th><th>Waist</th><th>Hip</th><th>Length</th></tr></thead>
+        <tbody>
+          <tr><td>S</td><td>34–35</td><td>28–29</td><td>36–37</td><td>42</td></tr>
+          <tr><td>M</td><td>36–37</td><td>30–31</td><td>38–39</td><td>43</td></tr>
+          <tr><td>L</td><td>38–39</td><td>32–33</td><td>40–41</td><td>44</td></tr>
+          <tr><td>XL</td><td>40–42</td><td>34–36</td><td>42–44</td><td>44</td></tr>
+          <tr><td>XXL</td><td>44–46</td><td>38–40</td><td>46–48</td><td>45</td></tr>
+        </tbody>
+      </table>
+      <table class="size-table" id="sizeTableKurti" style="display:none">
+        <thead><tr><th>Size</th><th>Bust</th><th>Waist</th><th>Hip</th><th>Kurti Length</th></tr></thead>
+        <tbody>
+          <tr><td>S</td><td>34</td><td>28</td><td>36</td><td>42–44</td></tr>
+          <tr><td>M</td><td>36</td><td>30</td><td>38</td><td>42–44</td></tr>
+          <tr><td>L</td><td>38</td><td>32</td><td>40</td><td>44–46</td></tr>
+          <tr><td>XL</td><td>40</td><td>34</td><td>42</td><td>44–46</td></tr>
+          <tr><td>XXL</td><td>44</td><td>38</td><td>46</td><td>46–48</td></tr>
+        </tbody>
+      </table>
+      <table class="size-table" id="sizeTableLehenga" style="display:none">
+        <thead><tr><th>Size</th><th>Bust</th><th>Waist</th><th>Hip</th><th>Skirt Length</th></tr></thead>
+        <tbody>
+          <tr><td>S</td><td>34</td><td>26–27</td><td>36</td><td>40–42</td></tr>
+          <tr><td>M</td><td>36</td><td>28–30</td><td>38</td><td>40–42</td></tr>
+          <tr><td>L</td><td>38</td><td>30–32</td><td>40</td><td>42–44</td></tr>
+          <tr><td>XL</td><td>40</td><td>32–34</td><td>42</td><td>42–44</td></tr>
+          <tr><td>XXL</td><td>44</td><td>36–38</td><td>46</td><td>44–46</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="size-tip"><strong>Not sure?</strong> Just WhatsApp us your measurements and we'll recommend the perfect size. We're always happy to help! 🌸</div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="logo.png" alt="Sisters Stylo Studio" />
+    <div class="nav-logo-text">
+      Sisters Stylo Studio
+      <span>Styled with love</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#collections">Collections</a></li>
+    <li><a href="#reels">Reels</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#how-to-order">Order</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+  </ul>
+  <a href="https://wa.me/919365017159" class="nav-cta" target="_blank">Shop on WhatsApp</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Now shipping worldwide</div>
+    <h1>Fashion <em>styled</em><br>with love</h1>
+    <p>Curated ethnic and contemporary fashion for women — handpicked with care, delivered straight to your door from the heart of Assam.</p>
+    <div class="hero-actions">
+      <a href="https://wa.me/919365017159" class="btn-primary" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        Shop Now
+      </a>
+      <a href="#collections" class="btn-secondary">Browse Collections</a>
+    </div>
+    <div class="hero-trust reveal-blur">
+      <div class="trust-item"><span class="trust-number">624+</span><span class="trust-label">Happy Customers</span></div>
+      <div class="trust-divider"></div>
+      <div class="trust-item"><span class="trust-number">305+</span><span class="trust-label">Styles Listed</span></div>
+      <div class="trust-divider"></div>
+      <div class="trust-item"><span class="trust-number">100%</span><span class="trust-label">Secure Payments</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-logo-wrap">
+      <div class="petal petal-1"></div>
+      <div class="petal petal-2"></div>
+      <div class="logo-ring">
+        <img src="logo.png" alt="Sisters Stylo Studio" />
+      </div>
+    </div>
+    <div class="hero-tag tag-love"><span class="hero-tag-dot dot-pink"></span> Curated with care</div>
+    <div class="hero-tag tag-ship"><span class="hero-tag-dot dot-green"></span> Ships Worldwide</div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span class="marquee-item">Ethnic Wear</span><span class="marquee-item">Contemporary Fashion</span><span class="marquee-item">Sarees &amp; Mekhela Chadors</span><span class="marquee-item">Puja Collections</span><span class="marquee-item">Kurtis &amp; Sets</span><span class="marquee-item">Jewellery</span><span class="marquee-item">Worldwide Shipping</span><span class="marquee-item">Online Payment</span>
+    <span class="marquee-item">Ethnic Wear</span><span class="marquee-item">Contemporary Fashion</span><span class="marquee-item">Sarees &amp; Mekhela Chadors</span><span class="marquee-item">Puja Collections</span><span class="marquee-item">Kurtis &amp; Sets</span><span class="marquee-item">Jewellery</span><span class="marquee-item">Worldwide Shipping</span><span class="marquee-item">Online Payment</span>
+  </div>
+</div>
+
+<!-- COUNTDOWN BANNER -->
+<div class="countdown-banner">
+  <span class="countdown-text">🌸 Bihu Special Sale — Ends in</span>
+  <div class="countdown-timer">
+    <div class="cd-unit"><span class="cd-num" id="cdDays">00</span><span class="cd-label">Days</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-unit"><span class="cd-num" id="cdHours">00</span><span class="cd-label">Hrs</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-unit"><span class="cd-num" id="cdMins">00</span><span class="cd-label">Min</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-unit"><span class="cd-num" id="cdSecs">00</span><span class="cd-label">Sec</span></div>
+  </div>
+  <a href="https://wa.me/919365017159" class="countdown-cta" target="_blank">Shop the Sale</a>
+</div>
+
+<!-- TRUST BADGES -->
+<div class="trust-strip">
+  <div class="trust-badges">
+    <div class="trust-badge"><div class="trust-badge-icon">🔒</div><div class="trust-badge-text"><strong>Secure Payment</strong><span>UPI · Bank Transfer</span></div></div>
+    <div class="trust-badge"><div class="trust-badge-icon">📦</div><div class="trust-badge-text"><strong>Careful Packaging</strong><span>Every order gift-wrapped</span></div></div>
+    <div class="trust-badge"><div class="trust-badge-icon">🌍</div><div class="trust-badge-text"><strong>Worldwide Shipping</strong><span>India &amp; International</span></div></div>
+    <div class="trust-badge"><div class="trust-badge-icon">💬</div><div class="trust-badge-text"><strong>WhatsApp Support</strong><span>Reply within 2 hrs</span></div></div>
+    <div class="trust-badge"><div class="trust-badge-icon">✨</div><div class="trust-badge-text"><strong>Authentic Fashion</strong><span>Personally curated</span></div></div>
+  </div>
+</div>
+<section class="usp-section">
+  <div class="usp-header reveal">
+    <p class="section-label">Why choose us</p>
+    <h2 class="section-title">Fashion you can <em>trust</em></h2>
+    <p class="section-sub">From Moranhat to the world — every piece is handpicked and shipped with love.</p>
+  </div>
+  <div class="usp-grid">
+    <div class="usp-card reveal reveal-delay-1"><div class="usp-icon">🌍</div><h3>Ships Worldwide</h3><p>We deliver your favourite fashion to your doorstep, no matter where you are in the world.</p></div>
+    <div class="usp-card reveal reveal-delay-2"><div class="usp-icon">💎</div><h3>Curated Quality</h3><p>Every outfit is personally handpicked and quality-checked before it reaches you.</p></div>
+    <div class="usp-card reveal reveal-delay-3"><div class="usp-icon">📲</div><h3>Easy WhatsApp Orders</h3><p>No complicated checkouts — just message us and we handle everything for you.</p></div>
+    <div class="usp-card reveal reveal-delay-4"><div class="usp-icon">🌸</div><h3>Styled with Love</h3><p>We're a sister-run boutique and every customer is treated like family.</p></div>
+  </div>
+</section>
+
+<!-- COLLECTIONS -->
+<section id="collections">
+  <div class="collections-header reveal">
+    <div>
+      <p class="section-label">What we offer</p>
+      <h2 class="section-title">Our <em>Collections</em></h2>
+    </div>
+    <a href="https://wa.me/919365017159" class="btn-secondary" target="_blank">View All on WhatsApp</a>
+  </div>
+  <div class="collections-grid">
+    <div class="coll-card reveal"><div class="coll-bg bg-rose"><div class="coll-pattern"></div><div class="coll-label"><p class="coll-tag">Featured</p><p class="coll-name">Sarees &amp; Mekhela Chadors</p></div></div><div class="coll-arrow">↗</div></div>
+    <div class="coll-card reveal reveal-delay-1"><div class="coll-bg bg-blush"><div class="coll-pattern"></div><div class="coll-label"><p class="coll-tag">Popular</p><p class="coll-name">Kurtis &amp; Sets</p></div></div><div class="coll-arrow">↗</div></div>
+    <div class="coll-card reveal reveal-delay-2"><div class="coll-bg bg-lavender"><div class="coll-pattern"></div><div class="coll-label"><p class="coll-tag">Trending</p><p class="coll-name">Lehengas</p></div></div><div class="coll-arrow">↗</div></div>
+    <div class="coll-card reveal reveal-delay-1"><div class="coll-bg bg-peach"><div class="coll-pattern"></div><div class="coll-label"><p class="coll-tag">New</p><p class="coll-name">Jewellery</p></div></div><div class="coll-arrow">↗</div></div>
+    <div class="coll-card reveal reveal-delay-2"><div class="coll-bg bg-mint"><div class="coll-pattern"></div><div class="coll-label"><p class="coll-tag">New Arrivals</p><p class="coll-name">Western Wear</p></div></div><div class="coll-arrow">↗</div></div>
+  </div>
+</section>
+
+<!-- OCCASION SHOP -->
+<section class="occasion-section" id="occasion">
+  <div class="reveal">
+    <p class="section-label">Shop by moment</p>
+    <h2 class="section-title">Dress for every <em>Occasion</em></h2>
+    <p class="section-sub">Filter by your event and find exactly what you need — from Bihu to weddings to everyday chic.</p>
+  </div>
+  <div class="occasion-chips reveal">
+    <button class="occ-chip active" data-filter="all">✦ All</button>
+    <button class="occ-chip" data-filter="bihu">🌾 Bihu</button>
+    <button class="occ-chip" data-filter="wedding">💍 Wedding</button>
+    <button class="occ-chip" data-filter="puja">🪔 Puja</button>
+    <button class="occ-chip" data-filter="casual">☀️ Casual</button>
+    <button class="occ-chip" data-filter="office">💼 Office</button>
+    <button class="occ-chip" data-filter="party">🎉 Party</button>
+  </div>
+  <div class="occasion-grid">
+    <div class="occ-card reveal" data-occ="bihu wedding">
+      <div class="occ-visual occ-img-wrap">
+        <img src="product-mekhela.jpg" alt="Mekhela Chador Set" class="occ-img" onerror="this.parentElement.innerHTML='<div class=occ-img-placeholder>📷<br><span>Add photo:<br>product-mekhela.jpg</span></div>'" />
+      </div>
+      <div class="occ-body"><p class="occ-occasion">Bihu · Wedding</p><p class="occ-name">Mekhela Chador Set</p><p class="occ-price">Starting ₹1,200</p><a href="https://wa.me/919365017159" class="occ-enquire" target="_blank">Enquire →</a></div>
+    </div>
+    <div class="occ-card reveal reveal-delay-1" data-occ="wedding puja party">
+      <div class="occ-visual occ-img-wrap">
+        <img src="product-lehenga.jpg" alt="Designer Lehenga" class="occ-img" onerror="this.parentElement.innerHTML='<div class=occ-img-placeholder>📷<br><span>Add photo:<br>product-lehenga.jpg</span></div>'" />
+      </div>
+      <div class="occ-body"><p class="occ-occasion">Wedding · Puja · Party</p><p class="occ-name">Designer Lehenga</p><p class="occ-price">Starting ₹2,500</p><a href="https://wa.me/919365017159" class="occ-enquire" target="_blank">Enquire →</a></div>
+    </div>
+    <div class="occ-card reveal reveal-delay-2" data-occ="casual office">
+      <div class="occ-visual occ-img-wrap">
+        <img src="product-kurti.jpg" alt="Kurti & Pant Set" class="occ-img" onerror="this.parentElement.innerHTML='<div class=occ-img-placeholder>📷<br><span>Add photo:<br>product-kurti.jpg</span></div>'" />
+      </div>
+      <div class="occ-body"><p class="occ-occasion">Casual · Office</p><p class="occ-name">Kurti &amp; Pant Set</p><p class="occ-price">Starting ₹650</p><a href="https://wa.me/919365017159" class="occ-enquire" target="_blank">Enquire →</a></div>
+    </div>
+    <div class="occ-card reveal reveal-delay-1" data-occ="wedding party puja">
+      <div class="occ-visual occ-img-wrap">
+        <img src="product-jewellery.jpg" alt="Bridal Jewellery Set" class="occ-img" onerror="this.parentElement.innerHTML='<div class=occ-img-placeholder>📷<br><span>Add photo:<br>product-jewellery.jpg</span></div>'" />
+      </div>
+      <div class="occ-body"><p class="occ-occasion">Wedding · Party</p><p class="occ-name">Bridal Jewellery Set</p><p class="occ-price">Starting ₹800</p><a href="https://wa.me/919365017159" class="occ-enquire" target="_blank">Enquire →</a></div>
+    </div>
+    <div class="occ-card reveal reveal-delay-2" data-occ="bihu puja">
+      <div class="occ-visual occ-img-wrap">
+        <img src="product-saree.jpg" alt="Silk Saree" class="occ-img" onerror="this.parentElement.innerHTML='<div class=occ-img-placeholder>📷<br><span>Add photo:<br>product-saree.jpg</span></div>'" />
+      </div>
+      <div class="occ-body"><p class="occ-occasion">Bihu · Puja</p><p class="occ-name">Silk Saree</p><p class="occ-price">Starting ₹1,800</p><a href="https://wa.me/919365017159" class="occ-enquire" target="_blank">Enquire →</a></div>
+    </div>
+    <div class="occ-card reveal reveal-delay-3" data-occ="casual party office">
+      <div class="occ-visual occ-img-wrap">
+        <img src="product-western.jpg" alt="Western Co-ord Set" class="occ-img" onerror="this.parentElement.innerHTML='<div class=occ-img-placeholder>📷<br><span>Add photo:<br>product-western.jpg</span></div>'" />
+      </div>
+      <div class="occ-body"><p class="occ-occasion">Casual · Party</p><p class="occ-name">Western Co-ord Set</p><p class="occ-price">Starting ₹900</p><a href="https://wa.me/919365017159" class="occ-enquire" target="_blank">Enquire →</a></div>
+    </div>
+  </div>
+  <div style="margin-top:2rem;" class="reveal">
+    <button class="size-guide-btn" onclick="document.getElementById('sizeModal').classList.add('open')">
+      📏 View Size Guide
+    </button>
+  </div>
+</section>
+
+<!-- TRENDING -->
+<section class="trending-section" id="trending">
+  <div class="reveal">
+    <p class="section-label">Right now</p>
+    <h2 class="section-title">Currently <em>Trending</em></h2>
+    <p class="section-sub">Our most-viewed pieces this week — don't miss out before they're gone.</p>
+  </div>
+  <div class="trending-grid">
+    <div class="trend-card reveal reveal-delay-1">
+      <div class="trend-visual trend-img-wrap">
+        <img src="trending-mekhela.jpg" alt="Assam Silk Mekhela Set" class="trend-img" onerror="this.parentElement.innerHTML='<div class=trend-img-placeholder>📷<span>trending-mekhela.jpg</span></div>'" />
+        <div class="trend-fire">🔥 Hot</div>
+        <div class="trend-views">👁 247 views</div>
+      </div>
+      <div class="trend-body">
+        <p class="trend-cat">Mekhela Chador</p>
+        <p class="trend-name">Assam Silk Mekhela Set</p>
+        <p class="trend-price">Starting from ₹1,400</p>
+        <a href="https://wa.me/919365017159" class="trend-btn" target="_blank">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          Enquire Now
+        </a>
+      </div>
+    </div>
+    <div class="trend-card reveal reveal-delay-2">
+      <div class="trend-visual trend-img-wrap">
+        <img src="trending-lehenga.jpg" alt="Floral Embroidered Lehenga" class="trend-img" onerror="this.parentElement.innerHTML='<div class=trend-img-placeholder>📷<span>trending-lehenga.jpg</span></div>'" />
+        <div class="trend-fire">🔥 Hot</div>
+        <div class="trend-views">👁 189 views</div>
+      </div>
+      <div class="trend-body">
+        <p class="trend-cat">Lehenga</p>
+        <p class="trend-name">Floral Embroidered Lehenga</p>
+        <p class="trend-price">Starting from ₹2,800</p>
+        <a href="https://wa.me/919365017159" class="trend-btn" target="_blank">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          Enquire Now
+        </a>
+      </div>
+    </div>
+    <div class="trend-card reveal reveal-delay-3">
+      <div class="trend-visual trend-img-wrap">
+        <img src="trending-kurti.jpg" alt="Cotton Printed Kurti Palazzo" class="trend-img" onerror="this.parentElement.innerHTML='<div class=trend-img-placeholder>📷<span>trending-kurti.jpg</span></div>'" />
+        <div class="trend-views">👁 134 views</div>
+      </div>
+      <div class="trend-body">
+        <p class="trend-cat">Kurti Set</p>
+        <p class="trend-name">Cotton Printed Kurti Palazzo</p>
+        <p class="trend-price">Starting from ₹750</p>
+        <a href="https://wa.me/919365017159" class="trend-btn" target="_blank">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          Enquire Now
+        </a>
+      </div>
+    </div>
+    <div class="trend-card reveal reveal-delay-4">
+      <div class="trend-visual trend-img-wrap">
+        <img src="trending-jewellery.jpg" alt="Gold-toned Oxidised Set" class="trend-img" onerror="this.parentElement.innerHTML='<div class=trend-img-placeholder>📷<span>trending-jewellery.jpg</span></div>'" />
+        <div class="trend-views">👁 98 views</div>
+      </div>
+      <div class="trend-body">
+        <p class="trend-cat">Jewellery</p>
+        <p class="trend-name">Gold-toned Oxidised Set</p>
+        <p class="trend-price">Starting from ₹450</p>
+        <a href="https://wa.me/919365017159" class="trend-btn" target="_blank">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          Enquire Now
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM REELS -->
+<section class="reels-section" id="reels">
+  <div class="reels-header reveal">
+    <p class="section-label">As seen on Instagram</p>
+    <h2 class="section-title">Latest <em>Reels</em></h2>
+    <p class="section-sub">Watch our newest arrivals, styling ideas and behind-the-scenes straight from our Instagram.</p>
+  </div>
+  <div class="reels-grid">
+    <!-- REEL 1 -->
+    <a href="https://www.instagram.com/reel/DV5RQ5ZAJtU/" class="reel-card-link reveal reveal-delay-1" target="_blank">
+      <div class="reel-card">
+        <div class="reel-preview" style="background-image: url('https://www.instagram.com/p/DV5RQ5ZAJtU/media/?size=l');">
+          <div class="reel-gradient"></div>
+          <div class="reel-play-btn">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="reel-label">
+            <span class="reel-ig-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </span>
+            @sistersstylostudio
+          </div>
+          <div class="reel-tag">New Arrival</div>
+        </div>
+        <div class="reel-info">
+          <p class="reel-title">Latest Collection Drop</p>
+          <span class="reel-watch-btn">Watch on Instagram →</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- REEL 2 -->
+    <a href="https://www.instagram.com/reel/DVxqGV7AJA4/" class="reel-card-link reveal reveal-delay-2" target="_blank">
+      <div class="reel-card">
+        <div class="reel-preview" style="background-image: url('https://www.instagram.com/p/DVxqGV7AJA4/media/?size=l');">
+          <div class="reel-gradient"></div>
+          <div class="reel-play-btn">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="reel-label">
+            <span class="reel-ig-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </span>
+            @sistersstylostudio
+          </div>
+          <div class="reel-tag">Styling Inspo</div>
+        </div>
+        <div class="reel-info">
+          <p class="reel-title">Styling Ideas for You</p>
+          <span class="reel-watch-btn">Watch on Instagram →</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- REEL 3 -->
+    <a href="https://www.instagram.com/reel/DVv56vBk0Ni/" class="reel-card-link reveal reveal-delay-3" target="_blank">
+      <div class="reel-card">
+        <div class="reel-preview" style="background-image: url('https://www.instagram.com/p/DVv56vBk0Ni/media/?size=l');">
+          <div class="reel-gradient"></div>
+          <div class="reel-play-btn">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="reel-label">
+            <span class="reel-ig-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </span>
+            @sistersstylostudio
+          </div>
+          <div class="reel-tag">Behind the Scenes</div>
+        </div>
+        <div class="reel-info">
+          <p class="reel-title">Behind the Studio</p>
+          <span class="reel-watch-btn">Watch on Instagram →</span>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div style="text-align:center; margin-top: 2.5rem;" class="reveal">
+    <a href="https://instagram.com/sistersstylostudio" class="btn-primary" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      See More on Instagram
+    </a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-grid">
+    <div class="reveal-right">
+      <p class="section-label reveal">Our Story</p>
+      <h2 class="section-title reveal">Born in <em>Assam</em>,<br>loved everywhere</h2>
+      <p class="about-text reveal">Sisters Stylo Studio was born from a simple idea — that great fashion shouldn't be hard to find. Managed by Mrinmoyee Borah, we started as a small boutique in Moranhat, Assam, and grew into a trusted fashion destination for women across India and beyond.</p>
+      <p class="about-text reveal">We believe every woman deserves to feel beautiful and confident. That's why we offer worldwide shipping and a personal, WhatsApp-first shopping experience.</p>
+      <a href="https://wa.me/919365017159" class="btn-primary reveal" style="margin-top:0.5rem;" target="_blank">Get in Touch</a>
+    </div>
+    <div class="about-visual reveal-left">
+      <div class="about-card"><span class="about-card-num">3+</span><span class="about-card-label">Years of fashion</span></div>
+      <div class="about-card"><span class="about-card-num">624+</span><span class="about-card-label">Customers served</span></div>
+      <div class="about-card"><span class="about-card-num">305+</span><span class="about-card-label">Styles available</span></div>
+      <div class="about-card"><span class="about-card-num">🌸</span><span class="about-card-label">Ships worldwide</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO ORDER -->
+<section class="order-section" id="how-to-order">
+  <div class="reveal">
+    <p class="section-label">Simple process</p>
+    <h2 class="section-title">How to <em>Order</em></h2>
+    <p class="section-sub">Shopping with us is as easy as sending a message.</p>
+  </div>
+  <div class="steps-row" id="stepsRow">
+    <div class="step-item">
+      <div class="step-num-wrap"><div class="step-num">1</div></div>
+      <span class="step-icon">🛍️</span>
+      <h4>Browse &amp; Pick</h4>
+      <p>Scroll our Instagram or WhatsApp catalogue and choose what you love.</p>
+    </div>
+    <div class="step-item">
+      <div class="step-num-wrap"><div class="step-num">2</div></div>
+      <span class="step-icon">💬</span>
+      <h4>WhatsApp Us</h4>
+      <p>Send us a message with your chosen item and size details.</p>
+    </div>
+    <div class="step-item">
+      <div class="step-num-wrap"><div class="step-num">3</div></div>
+      <span class="step-icon">💳</span>
+      <h4>Pay Online</h4>
+      <p>UPI, bank transfer, and more. No COD — online payments only.</p>
+    </div>
+    <div class="step-item">
+      <div class="step-num-wrap"><div class="step-num">4</div></div>
+      <span class="step-icon">📦</span>
+      <h4>Get Delivered</h4>
+      <p>We pack it with love and ship to your address, anywhere in the world.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHATSAPP CATALOGUE -->
+<section class="wa-catalogue-section" id="catalogue">
+  <div class="wa-catalogue-inner reveal-scale">
+    <div>
+      <p class="wa-cat-label">Browse like an app</p>
+      <h2 class="wa-cat-title">Our full catalogue,<br><em>on WhatsApp</em></h2>
+      <p class="wa-cat-sub">No app downloads, no accounts, no complicated checkouts. Browse every outfit we stock — sarees, kurtis, lehengas, jewellery and more — right inside WhatsApp. Just tap and shop.</p>
+      <div class="wa-cat-features">
+        <div class="wa-cat-feature"><span class="wa-cat-feature-dot"></span>New arrivals daily</div>
+        <div class="wa-cat-feature"><span class="wa-cat-feature-dot"></span>500+ styles in catalogue</div>
+        <div class="wa-cat-feature"><span class="wa-cat-feature-dot"></span>Instant reply guaranteed</div>
+      </div>
+      <a href="https://wa.me/919365017159?text=Hi%2C%20I%20want%20to%20browse%20your%20catalogue!" class="wa-cat-btn" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        Open Catalogue
+      </a>
+    </div>
+    <div class="wa-cat-phone">
+      <div class="wa-phone-mockup">
+        <div class="wa-phone-header">
+          <div class="wa-phone-avatar"><img src="logo.png" alt="" /></div>
+          <div><div class="wa-phone-name">Sisters Stylo</div><div class="wa-phone-status">● Online</div></div>
+        </div>
+        <div class="wa-bubble">Hi! Send me your catalogue 🌸</div>
+        <div class="wa-bubble sent">Sure! Here are our latest arrivals 👗</div>
+        <div class="wa-bubble">I love the Mekhela set! What sizes?</div>
+        <div class="wa-bubble sent">S to XXL available ✨ Shall I reserve?</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div class="reveal">
+    <p class="section-label">Customer love</p>
+    <h2 class="section-title">What they're <em>saying</em></h2>
+    <p class="section-sub">Real reviews from real customers who love what they ordered.</p>
+  </div>
+
+  <div class="reviews-carousel-wrap" id="reviewsWrap">
+    <div class="reviews-track" id="reviewsTrack">
+
+      <div class="review-card featured">
+        <div class="review-quote">"</div>
+        <div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+        <p class="review-text">Absolutely love the saree I ordered! The quality is stunning and it arrived perfectly packed. Will definitely order again and again.</p>
+        <div class="reviewer"><div class="reviewer-avatar">PR</div><div><p class="reviewer-name">Priyanka R.</p><p class="reviewer-loc">Guwahati, Assam</p></div></div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-quote">"</div>
+        <div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+        <p class="review-text">Ordered a kurti set from Bangalore — shipping was so fast and the fabric was even better than it looked in the photos!</p>
+        <div class="reviewer"><div class="reviewer-avatar">SM</div><div><p class="reviewer-name">Shreya M.</p><p class="reviewer-loc">Bangalore, Karnataka</p></div></div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-quote">"</div>
+        <div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+        <p class="review-text">Mrinmoyee didi is so helpful and patient. She helped me pick the perfect lehenga for my cousin's wedding. 10/10!</p>
+        <div class="reviewer"><div class="reviewer-avatar">RD</div><div><p class="reviewer-name">Rimpi D.</p><p class="reviewer-loc">Dibrugarh, Assam</p></div></div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-quote">"</div>
+        <div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+        <p class="review-text">The Mekhela Chador I received was exactly as described — vibrant colors and such fine fabric. My family loved it at the Bihu celebration!</p>
+        <div class="reviewer"><div class="reviewer-avatar">JP</div><div><p class="reviewer-name">Jyotishna P.</p><p class="reviewer-loc">Jorhat, Assam</p></div></div>
+      </div>
+
+      <div class="review-card featured">
+        <div class="review-quote">"</div>
+        <div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+        <p class="review-text">I'm based in Dubai and was nervous about ordering from India but the packaging was perfect and delivery was faster than expected. Highly recommend!</p>
+        <div class="reviewer"><div class="reviewer-avatar">NK</div><div><p class="reviewer-name">Namrata K.</p><p class="reviewer-loc">Dubai, UAE</p></div></div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-quote">"</div>
+        <div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+        <p class="review-text">Ordered three kurtis for Durga Puja and all three were stunning. The price is so reasonable for the quality you get. Already placed another order!</p>
+        <div class="reviewer"><div class="reviewer-avatar">MB</div><div><p class="reviewer-name">Manisha B.</p><p class="reviewer-loc">Tinsukia, Assam</p></div></div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-quote">"</div>
+        <div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+        <p class="review-text">Such a warm and personal shopping experience. It felt like buying from a friend who truly cares about what you wear. The jewellery set is gorgeous!</p>
+        <div class="reviewer"><div class="reviewer-avatar">PG</div><div><p class="reviewer-name">Pallabi G.</p><p class="reviewer-loc">Sivasagar, Assam</p></div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="carousel-nav">
+    <button class="carousel-btn" id="revPrev" aria-label="Previous">&#8592;</button>
+    <div class="carousel-dots" id="reviewDots"></div>
+    <button class="carousel-btn" id="revNext" aria-label="Next">&#8594;</button>
+  </div>
+</section>
+
+<!-- MEET THE OWNER -->
+<section class="meet-section" id="meet">
+  <div class="meet-grid">
+    <div class="meet-photo-wrap reveal-scale">
+      <div class="meet-photo">
+        <img src="owner.jpg" alt="Mrinmoyee Borah" onerror="this.parentElement.innerHTML='<div class=meet-photo-placeholder>👩‍💼<span>Add your photo<br>Save as: owner.jpg<br>in the same folder</span></div>'" />
+      </div>
+      <div class="meet-badge">Mrinmoyee Borah <span>Founder & Stylist</span></div>
+    </div>
+    <div>
+      <p class="section-label reveal">The face behind the brand</p>
+      <h2 class="section-title reveal">Meet the <em>Woman</em><br>who styles you</h2>
+      <blockquote class="meet-quote reveal">"I started this because every woman in Assam deserves to feel beautiful — without travelling to the city."</blockquote>
+      <p class="meet-body reveal">Hi, I'm Mrinmoyee — the heart behind Sisters Stylo Studio. I grew up watching women in our community struggle to find quality ethnic wear without spending hours travelling to big cities. So in Moranhat, I started something small with a big dream — to bring beautiful, curated fashion directly to your WhatsApp.</p>
+      <p class="meet-body reveal">What started as a passion project has grown into a boutique that ships across India and the world. Every piece I list is something I would personally wear or gift to someone I love. That's my promise to you.</p>
+      <div class="meet-tags reveal">
+        <span class="meet-tag">🌸 Moranhat, Assam</span>
+        <span class="meet-tag">✦ 3+ Years in Fashion</span>
+        <span class="meet-tag">💬 Personally replies to every message</span>
+        <span class="meet-tag">🌍 Ships to 20+ countries</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERY PARTNERS -->
+<div class="delivery-strip">
+  <p class="delivery-label">We ship with trusted partners</p>
+  <div class="delivery-logos">
+    <div class="delivery-logo">
+      <div class="delivery-logo-icon dl-delhivery">DL</div>
+      <span class="delivery-logo-name">Delhivery</span>
+    </div>
+    <div class="delivery-logo">
+      <div class="delivery-logo-icon dl-indiapost">IP</div>
+      <span class="delivery-logo-name">India Post</span>
+    </div>
+    <div class="delivery-logo">
+      <div class="delivery-logo-icon dl-dhl">DHL</div>
+      <span class="delivery-logo-name">DHL</span>
+    </div>
+    <div class="delivery-logo">
+      <div class="delivery-logo-icon dl-bluedart">BD</div>
+      <span class="delivery-logo-name">BlueDart</span>
+    </div>
+    <div class="delivery-logo">
+      <div class="delivery-logo-icon dl-ecom">EX</div>
+      <span class="delivery-logo-name">Ecom Express</span>
+    </div>
+    <div class="delivery-logo">
+      <div class="delivery-logo-icon dl-fedex">FX</div>
+      <span class="delivery-logo-name">FedEx</span>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="reveal">
+    <p class="section-label">Got questions?</p>
+    <h2 class="section-title">Shipping &amp; <em>FAQs</em></h2>
+    <p class="section-sub">Everything you need to know before placing your order.</p>
+  </div>
+  <div class="faq-grid reveal">
+    <div class="faq-item">
+      <button class="faq-q"><span class="faq-q-text">How long does delivery take?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Within India — 3 to 7 business days depending on your location. International orders — 10 to 20 business days. We use trusted courier services and share tracking details once dispatched.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span class="faq-q-text">Do you accept returns or exchanges?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>We accept exchanges within 3 days of delivery if there is a manufacturing defect or size issue. Please WhatsApp us with photos of the item immediately. Note: sale items are non-returnable.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span class="faq-q-text">What payment methods do you accept?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>We accept all UPI apps (GPay, PhonePe, Paytm), bank transfers (NEFT/IMPS), and online banking. We do NOT accept Cash on Delivery (COD). Payment must be confirmed before dispatch.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span class="faq-q-text">Do you ship internationally?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Yes! We ship worldwide. International shipping charges apply based on destination country and package weight. WhatsApp us your address to get a shipping quote before ordering.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span class="faq-q-text">How do I know which size to order?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Check our Size Guide (available on this page) for detailed measurements. If you're between sizes, we always recommend sizing up. You can also WhatsApp us your measurements and we'll suggest the best fit.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span class="faq-q-text">Can I customise or request a specific colour?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>For some items yes! WhatsApp us with your requirements and we'll let you know what's available. Custom orders may take a few extra days depending on stock availability.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span class="faq-q-text">How do I place an order?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Just WhatsApp us at +91 93650 17159 with the item you want (screenshot or name), your size, and your delivery address. We'll confirm availability, send the payment details, and dispatch once payment is done.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span class="faq-q-text">Is the colour shown in photos accurate?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>We try our best to capture true colours. However, slight variations may occur due to screen calibration differences. If you need more photos or a video of the product, just ask us on WhatsApp!</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-inner">
+    <p class="section-label reveal">Get in touch</p>
+    <h2 class="section-title reveal">Ready to look <em>fabulous?</em></h2>
+    <p class="cta-sub reveal">Message us on WhatsApp or Instagram and we'll guide you through our latest collections.</p>
+    <div class="cta-actions reveal">
+      <a href="https://wa.me/919365017159" class="btn-white" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        WhatsApp Us
+      </a>
+      <a href="https://instagram.com/sistersstylostudio" class="btn-outline-white" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Follow on Instagram
+      </a>
+    </div>
+    <div class="cta-info reveal">
+      <div class="cta-info-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l.27-.81a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 16.92z"/></svg>
+        +91 93650 17159
+      </div>
+      <div class="cta-info-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Moranhat, Charaideo, Assam — 785670
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Sisters Stylo Studio<span>Styled with love · Est. Moranhat, Assam</span></div>
+  <ul class="footer-links">
+    <li><a href="#collections">Collections</a></li>
+    <li><a href="#reels">Reels</a></li>
+    <li><a href="https://instagram.com/sistersstylostudio" target="_blank">Instagram</a></li>
+    <li><a href="https://wa.me/919365017159" target="_blank">WhatsApp</a></li>
+  </ul>
+  <p class="footer-copy">© 2025 Sisters Stylo Studio. All rights reserved.</p>
+</footer>
+
+<!-- SCROLL TO TOP -->
+<button id="scrollTop" title="Back to top">↑</button>
+
+<script>
+  //  NAV SCROLL SHADOW
+  const nav = document.querySelector('nav');
+  const scrollTopBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      nav && nav.classList.add('scrolled');
+      scrollTopBtn && scrollTopBtn.classList.add('visible');
+    } else {
+      nav && nav.classList.remove('scrolled');
+      scrollTopBtn && scrollTopBtn.classList.remove('visible');
+    }
+  });
+  scrollTopBtn && scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  //  PAGE LOADER
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const loader = document.getElementById('page-loader');
+      if (loader) loader.classList.add('hidden');
+    }, 1900);
+  });
+
+
+  //  SCROLL REVEAL — all variants
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-blur');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  // Auto-stagger grid children that aren't already staggered
+  document.querySelectorAll('.usp-grid, .trending-grid, .occasion-grid, .reviews-track, .faq-grid, .delivery-logos, .reels-grid').forEach(grid => {
+    grid.querySelectorAll(':scope > *').forEach((child, i) => {
+      if (!child.classList.contains('reveal')) {
+        child.classList.add('reveal');
+        if (i > 0) child.style.transitionDelay = (i * 0.08) + 's';
+        revealObserver.observe(child);
+      }
+    });
+  });
+
+  //  STEPS ANIMATION
+  const stepsRow = document.getElementById('stepsRow');
+  const stepItems = stepsRow ? stepsRow.querySelectorAll('.step-item') : [];
+  const stepsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        stepsRow.classList.add('line-visible');
+        stepItems.forEach((item, i) => { setTimeout(() => item.classList.add('step-visible'), i * 160); });
+        stepsObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.25 });
+  if (stepsRow) stepsObserver.observe(stepsRow);
+
+  //  COUNTDOWN TIMER (Dynamic 30-Day Launch)
+  (function() {
+    const target = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).getTime();
+    function tick() {
+      const now = Date.now();
+      let diff = target - now;
+      if (diff < 0) diff = 0;
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      const fmt = n => String(n).padStart(2, '0');
+      
+      const elD = document.getElementById('cdDays');
+      const elH = document.getElementById('cdHours');
+      const elM = document.getElementById('cdMins');
+      const elS = document.getElementById('cdSecs');
+      
+      if(elD) elD.textContent = fmt(d);
+      if(elH) elH.textContent = fmt(h);
+      if(elM) elM.textContent = fmt(m);
+      if(elS) elS.textContent = fmt(s);
+    }
+    tick(); // Run immediately
+    setInterval(tick, 1000);
+  })();
+
+  //  OCCASION FILTER
+  (function() {
+    const chips = document.querySelectorAll('.occ-chip');
+    const cards = document.querySelectorAll('.occ-card');
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        const filter = chip.dataset.filter;
+        cards.forEach(card => {
+          const occ = card.dataset.occ || '';
+          card.style.display = (filter === 'all' || occ.includes(filter)) ? '' : 'none';
+        });
+      });
+    });
+  })();
+
+  //  SIZE GUIDE MODAL
+  (function() {
+    const modal   = document.getElementById('sizeModal');
+    const closeBtn = document.getElementById('sizeModalClose');
+    const tabs    = document.querySelectorAll('.size-tab');
+    const tables  = { saree: 'sizeTableSaree', kurti: 'sizeTableKurti', lehenga: 'sizeTableLehenga' };
+
+    if (closeBtn) closeBtn.addEventListener('click', () => modal.classList.remove('open'));
+    modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('open'); });
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        Object.values(tables).forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
+        const key = tab.dataset.table;
+        if (tables[key]) { const el = document.getElementById(tables[key]); if (el) el.style.display = ''; }
+      });
+    });
+  })();
+
+  //  FAQ ACCORDION
+  (function() {
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  })();
+
+  //  REVIEWS CAROUSEL
+  (function() {
+    const track    = document.getElementById('reviewsTrack');
+    const wrap     = document.getElementById('reviewsWrap');
+    const dotsEl   = document.getElementById('reviewDots');
+    const btnPrev  = document.getElementById('revPrev');
+    const btnNext  = document.getElementById('revNext');
+    if (!track) return;
+    const cards = Array.from(track.querySelectorAll('.review-card'));
+    const total = cards.length;
+    let current = 0, autoTimer, visibleCount = 3;
+
+    function getVisible() { return window.innerWidth < 640 ? 1 : window.innerWidth < 960 ? 2 : 3; }
+    function buildDots() {
+      dotsEl.innerHTML = '';
+      const pages = total - visibleCount + 1;
+      for (let i = 0; i < pages; i++) {
+        const d = document.createElement('span');
+        d.className = 'dot' + (i === 0 ? ' active' : '');
+        d.addEventListener('click', () => goTo(i));
+        dotsEl.appendChild(d);
+      }
+    }
+    function updateDots() { dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current)); }
+    function getCardWidth() { return cards[0] ? cards[0].getBoundingClientRect().width + 24 : 0; }
+    function goTo(idx) {
+      const pages = total - visibleCount + 1;
+      current = Math.max(0, Math.min(idx, pages - 1));
+      track.style.transform = `translateX(-${current * getCardWidth()}px)`;
+      updateDots();
+    }
+    function next() { goTo(current + 1 < total - visibleCount + 1 ? current + 1 : 0); }
+    function prev() { goTo(current > 0 ? current - 1 : total - visibleCount); }
+    function startAuto() { autoTimer = setInterval(next, 3500); }
+    function stopAuto()  { clearInterval(autoTimer); }
+
+    btnNext.addEventListener('click', () => { stopAuto(); next(); startAuto(); });
+    btnPrev.addEventListener('click', () => { stopAuto(); prev(); startAuto(); });
+    wrap.addEventListener('mouseenter', stopAuto);
+    wrap.addEventListener('mouseleave', startAuto);
+    let tx = 0;
+    wrap.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+    wrap.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - tx;
+      if (Math.abs(dx) > 40) { stopAuto(); dx < 0 ? next() : prev(); startAuto(); }
+    });
+    function init() { visibleCount = getVisible(); buildDots(); goTo(current); }
+    window.addEventListener('resize', init);
+    init(); startAuto();
+  })();
+</script>
+
+</body></html>
