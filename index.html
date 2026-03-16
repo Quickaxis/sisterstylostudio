@@ -1158,70 +1158,140 @@
     .faq-item.open .faq-a { max-height: 200px; padding: 0 1.5rem 1.25rem; }
     .faq-a p { font-size: 0.88rem; color: var(--ink-muted); font-weight: 300; line-height: 1.75; }
 
-    /* RESPONSIVE */
-    @media (max-width: 960px) {
-      .hero { grid-template-columns: 1fr; text-align: center; }
-      .hero p { margin: 0 auto 2.5rem; }
-      .hero-actions { justify-content: center; }
-      .hero-trust { justify-content: center; }
-      .hero-visual { order: -1; }
-      .hero-logo-wrap { width: 260px; }
-      .collections-grid { grid-template-columns: 1fr 1fr; }
-      .coll-card:first-child { grid-column: 1 / -1; grid-row: auto; }
-      .coll-card:first-child .coll-bg { min-height: 260px; }
-      .reels-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
-      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      section { padding: 70px 5vw; }
-      nav { padding: 0 5vw; }
-      .hero { padding: 100px 5vw 70px; gap: 3rem; }
-      footer { padding: 2.5rem 5vw; }
-      .trending-grid { grid-template-columns: repeat(2, 1fr); }
-      .occasion-grid { grid-template-columns: repeat(2, 1fr); }
-      .wa-catalogue-inner { grid-template-columns: 1fr; }
-      .wa-cat-phone { display: none; }
-      .meet-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .meet-badge { right: 0; bottom: -16px; }
-      .delivery-logos { gap: 0; }
-      .delivery-logo { padding: 0 1.25rem; }
-      .faq-grid { grid-template-columns: 1fr; }
-      .trust-badge { padding: 8px 16px; }
-      .occasion-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
-      .trending-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
-      
-      /* Vertical Timeline for Mobile */
-      .steps-row { 
-        display: flex; flex-direction: column; 
-        gap: 2rem; position: relative; 
-        padding-left: 2.5rem; 
+    /* COMPLETE MOBILE RESPONSIVENESS (768px) */
+    @media (max-width: 768px) {
+      section { padding: 60px 5vw; }
+      .section-title { font-size: clamp(1.8rem, 6vw, 2.4rem); }
+
+      /* 1. NAVBAR */
+      .nav-links { display: none; }
+      .nav-cta { font-size: 0.7rem; padding: 8px 14px; }
+      .logo-brand { font-size: 0.95rem; }
+
+      /* 2. HERO */
+      .hero { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
+      .hero h1 { font-size: clamp(2.2rem, 8vw, 3rem); }
+      .hero-logo-wrap { width: 240px; margin: 0 auto; }
+      .hero-tag { display: none; }
+      .hero-trust { gap: 1rem; justify-content: center; }
+      .trust-number { font-size: 1.4rem; }
+      .hero-content { order: 2; }
+      .hero-visual { order: 1; }
+
+      /* 3. COUNTDOWN BANNER */
+      .countdown-banner { flex-direction: column; text-align: center; gap: 1rem; }
+      .cd-num { font-size: 1.1rem; }
+      .cd-unit { min-width: 42px; }
+      .countdown-cta { width: 100%; text-align: center; }
+
+      /* 4. TRUST STRIP */
+      .trust-badges { 
+        display: grid; 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 0; 
       }
-      .steps-row::before {
-        display: block !important;
-        width: 1.5px; height: calc(100% - 100px);
-        top: 60px; left: calc(2.5rem + 29px);
-        transform: scaleY(0); transform-origin: top;
+      .trust-badge { 
+        padding: 8px 12px; 
+        border-right: 1.5px solid var(--border-soft); 
+        border-bottom: 1.5px solid var(--border-soft);
       }
-      .steps-row.line-visible::before { transform: scaleY(1); }
-      .step-item { 
-        text-align: left; display: flex; align-items: flex-start; 
-        gap: 1.5rem; padding: 0; background: transparent; 
-        border: none; box-shadow: none; 
-      }
-      .step-num-wrap { flex-shrink: 0; margin-bottom: 0; }
-      .step-icon { display: none; }
-      .step-item h4 { margin-top: 10px; font-size: 1.25rem; }
-    }
-    @media (max-width: 600px) {
-      .collections-grid { grid-template-columns: 1fr; }
-      .trending-grid { grid-template-columns: 1fr; }
+      .trust-badge:nth-child(2n) { border-right: none; }
+      .trust-badge:nth-child(n+5) { border-bottom: none; }
+      .trust-badge-icon { width: 28px; height: 28px; font-size: 14px; }
+
+      /* 5. COLLECTIONS GRID */
+      .collections-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .coll-card:first-child { grid-column: auto; grid-row: auto; }
+      .coll-card:first-child .coll-bg { min-height: 220px; }
+      .coll-card .coll-bg { min-height: 140px; }
+
+      /* 6. OCCASION CHIPS */
+      .occasion-chips { flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+      .occ-chip { font-size: 0.75rem; padding: 8px 14px; }
+
+      /* 7. OCCASION GRID */
       .occasion-grid { grid-template-columns: 1fr; }
+      .occ-visual { height: 180px; }
+
+      /* 8. TRENDING GRID */
+      .trending-grid { grid-template-columns: 1fr; }
+      .trend-visual { height: 200px; }
+
+      /* 9. REELS GRID */
+      .reels-grid { grid-template-columns: 1fr; max-width: 100%; }
+      .reel-preview { height: 260px; }
+
+      /* 10. ABOUT SECTION */
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-visual { 
+        display: grid; 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 1rem;
+      }
+
+      /* 11. HOW TO ORDER */
       .steps-row { 
-        padding-left: 1.5rem; 
-        gap: 2.5rem;
+        display: grid; 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 1rem; 
+        padding-left: 0;
       }
-      .steps-row::before {
-        left: calc(1.5rem + 29px);
+      .steps-row::before { display: none !important; }
+      .step-item { 
+        text-align: center; 
+        display: flex;
+        flex-direction: column; 
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1.5rem 1rem;
+        background: var(--white);
+        border: 1px solid var(--border-soft);
       }
-      .nav-cta { display: none; }
+      .step-num-wrap { margin-bottom: 0; }
+      .step-icon { display: block; transform: none; opacity: 1; margin: 0; }
+
+      /* 12. REVIEWS CAROUSEL */
+      .review-card { min-width: 100% !important; flex: 0 0 100% !important; }
+
+      /* 13. WHATSAPP CATALOGUE */
+      .wa-catalogue-inner { grid-template-columns: 1fr; padding: 2rem 1.5rem; text-align: center; }
+      .wa-cat-phone { display: none; }
+      .wa-cat-title { font-size: 1.6rem; }
+      .wa-cat-features { justify-content: center; }
+
+      /* 14. MEET THE OWNER */
+      .meet-grid { grid-template-columns: 1fr; }
+      .meet-photo-wrap { aspect-ratio: 4/5; height: auto; }
+      .meet-badge { right: 0; bottom: -12px; font-size: 0.8rem; }
+
+      /* 15. DELIVERY STRIP */
+      .delivery-logos { 
+        display: grid; 
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 1.5rem;
+        justify-items: center;
+      }
+      .delivery-logo { padding: 0 0.75rem; }
+      .delivery-logo-icon { width: 40px; height: 40px; font-size: 0.75rem; }
+
+      /* 16. FAQ */
+      .faq-grid { grid-template-columns: 1fr; }
+      .faq-q { padding: 1.1rem 1.25rem; }
+
+      /* 17. CTA SECTION */
+      .cta-inner { padding: 80px 6vw; }
+      .cta-actions { flex-direction: column; gap: 1rem; }
+      .cta-actions .btn-white, .cta-actions .btn-outline-white { width: 100%; justify-content: center; }
+
+      /* 18. FOOTER */
+      footer { flex-direction: column; text-align: center; gap: 1.25rem; align-items: center; padding: 40px 5vw; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+
+      /* 19. FLOATING WHATSAPP */
+      .wa-float { bottom: 16px; right: 16px; width: 50px; height: 50px; }
+
+      /* 20. SCROLL TO TOP */
+      #scrollTop { bottom: 80px; right: 16px; }
     }
 
     /* FULL ANIMATION SYSTEM */
